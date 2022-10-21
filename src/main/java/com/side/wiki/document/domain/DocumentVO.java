@@ -1,8 +1,8 @@
-package com.side.wiki.document;
+package com.side.wiki.document.domain;
 
 import java.util.Date;
 
-import org.springframework.stereotype.Repository;
+import lombok.Data;
 
 /*
  CREATE TABLE TABLE1 
@@ -26,6 +26,7 @@ nocache
 nocycle;
 
  */
+@Data
 public class DocumentVO {
 
 	private String docTitle;
