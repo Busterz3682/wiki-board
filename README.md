@@ -2,4 +2,5 @@
       
 221019 - IntelliJ로 시도하다 너무 어려워서 포기하고 STS로 선회    
 221020 - 전체적인 페이지 구상 및 페이지에 적합해보이는 무료 html 템플릿 검색   
-221021 - 기본적 VO, DAO, CONTROLLER, SERVICE 구현중
+221021 - 기본적 VO, DAO, CONTROLLER, SERVICE 틀 잡아놓기
+221022 - DB연동 해보기
