@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 /*
- CREATE TABLE TABLE1 
+ CREATE TABLE DOC 
 (
   DOC_TITLE VARCHAR2(500) NOT NULL 
 , DOC_CONTENT VARCHAR2(4000) 

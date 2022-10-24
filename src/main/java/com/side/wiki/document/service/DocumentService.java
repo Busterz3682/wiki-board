@@ -7,9 +7,9 @@ public interface DocumentService {
 	
 	//구현해야 할 기능들(CRUD)
 	//문서 작성
-	void insertDoc();
+	void insertDoc(DocumentVO vo);
 	//문서 조회
-	DocumentVO getDocList();
+	DocumentVO getDoc();
 	//문서 수정
 	void updateDoc();
 	//문서 삭제
