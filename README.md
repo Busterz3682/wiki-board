@@ -5,3 +5,4 @@
 221021 - 기본적 VO, DAO, CONTROLLER, SERVICE 틀 잡아놓기      
 221022 - 레퍼런스 파일 없이 혼자 작성하려니 너무 어려워서 책 다시보는중    
 221023 - 책으로 복습하기 2일차
+221024 - org.springframework.web.servlet.PageNotFound - No mapping fo 오류 -> tomcat module path 수정 후 해결
