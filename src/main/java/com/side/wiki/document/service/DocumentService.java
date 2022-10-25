@@ -9,7 +9,7 @@ public interface DocumentService {
 	//문서 작성
 	void insertDoc(DocumentVO vo);
 	//문서 조회
-	DocumentVO getDoc();
+	DocumentVO getDoc(DocumentVO vo);
 	//문서 수정
 	void updateDoc();
 	//문서 삭제

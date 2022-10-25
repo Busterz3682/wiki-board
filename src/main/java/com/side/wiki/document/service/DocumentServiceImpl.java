@@ -20,8 +20,8 @@ public class DocumentServiceImpl implements DocumentService {
 
 	//문서 조회
 	@Override
-	public DocumentVO getDoc() {
-		return null;
+	public DocumentVO getDoc(DocumentVO vo) {
+		return documentDAO.getDoc(vo);
 	}
 
 	//문서 수정

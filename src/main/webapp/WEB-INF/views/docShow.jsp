@@ -14,15 +14,15 @@
 						style="text-align: center;">
 						<td width="5"></td>
 						<td>글쓰기</td>
-						<td width="5">></td>
+						<td width="5"></td>
 					</tr>
 				</table>
-				<form action="/wiki/insertDoc" method="post">
+				<form action="/wiki/updateDoc" method="post">
 					<table>
 						<tr>
 							<td>&nbsp;</td>
 							<td align="center">제목</td>
-							<td><input name="docTitle" size="50" maxlength="100"></td>
+							<td>${doc.docTitle }</td>
 							<td>&nbsp;</td>
 						</tr>
 						<tr height="1" bgcolor="#dddddd">
@@ -31,7 +31,7 @@
 						<tr>
 							<td>&nbsp;</td>
 							<td align="center">내용</td>
-							<td><textarea name="docContent" cols="50" rows="13"></textarea></td>
+							<td><textarea name="docContent" cols="50" rows="13">${doc.docContent }</textarea></td>
 							<td>&nbsp;</td>
 						</tr>
 						<tr height="1" bgcolor="#dddddd">
@@ -40,10 +40,10 @@
 						<tr height="1" bgcolor="#82B5DF">
 							<td colspan="4"></td>
 						</tr>
+						<tr align="right"><td>등록일시 - ${doc.docDate }</td></tr>
 						<tr align="center">
 							<td>&nbsp;</td>
-							<td colspan="2"><input type="submit" value="등록"> <input
-								type=button value="취소">
+							<td colspan="2"><input type="submit" value="수정">
 							<td>&nbsp;</td>
 						</tr>
 					</table>

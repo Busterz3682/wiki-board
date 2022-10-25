@@ -37,17 +37,17 @@ public class DocumentDAO {
 	//문서 조회
 	public DocumentVO getDoc(DocumentVO vo) {
 		conn = JDBCUtil.getConnection();
-		DocumentVO doc = null;
+		DocumentVO doc = new DocumentVO();
 
 		try {
 			stmt = conn.prepareStatement("select * from doc where(doc_title = ?)");
 			stmt.setString(1, vo.getDocTitle());
 			rs = stmt.executeQuery();
 			if(rs.next()) {
-				vo.setDocTitle(rs.getString("doc_title"));
-				vo.setDocContent(rs.getString("doc_content"));
-				vo.setDocDate(rs.getDate("doc_date"));
-				vo.setDocId(rs.getInt("doc_id"));
+				doc.setDocTitle(rs.getString("doc_title"));
+				doc.setDocContent(rs.getString("doc_content"));
+				doc.setDocDate(rs.getDate("doc_date"));
+				doc.setDocId(rs.getInt("doc_id"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,6 +57,13 @@ public class DocumentDAO {
 		return doc;
 	}
 
+	//문서 수정
+	public void updateDoc(DocumentVO vo) {
+		conn = JDBCUtil.getConnection();
+	
+//		stmt = conn.prepareStatement("update)
+	}
+	//문서 삭제
 
 
 
