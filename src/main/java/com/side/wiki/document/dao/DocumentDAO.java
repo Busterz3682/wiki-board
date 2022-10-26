@@ -30,7 +30,7 @@ public class DocumentDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			JDBCUtil.close(rs, stmt, conn);
+			JDBCUtil.close(stmt, conn);
 		}
 	}
 
@@ -60,8 +60,16 @@ public class DocumentDAO {
 	//문서 수정
 	public void updateDoc(DocumentVO vo) {
 		conn = JDBCUtil.getConnection();
-	
-//		stmt = conn.prepareStatement("update)
+		try {
+			stmt = conn.prepareStatement("update doc set doc_content = ?, doc_date = sysdate where doc_title= ?");
+			stmt.setString(1, vo.getDocContent());
+			stmt.setString(2, vo.getDocTitle());
+			stmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(stmt, conn);
+		}
 	}
 	//문서 삭제
 

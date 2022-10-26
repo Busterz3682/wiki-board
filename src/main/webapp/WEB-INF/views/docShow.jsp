@@ -1,3 +1,4 @@
+<%@page import="com.side.wiki.document.domain.DocumentVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,7 +14,7 @@
 					<tr
 						style="text-align: center;">
 						<td width="5"></td>
-						<td>글쓰기</td>
+						<td>문서조회</td>
 						<td width="5"></td>
 					</tr>
 				</table>
@@ -21,6 +22,8 @@
 					<table>
 						<tr>
 							<td>&nbsp;</td>
+							<td><input type="hidden" value="${doc.docTitle }" name="docTitle">
+							</td>
 							<td align="center">제목</td>
 							<td>${doc.docTitle }</td>
 							<td>&nbsp;</td>
@@ -31,7 +34,7 @@
 						<tr>
 							<td>&nbsp;</td>
 							<td align="center">내용</td>
-							<td><textarea name="docContent" cols="50" rows="13">${doc.docContent }</textarea></td>
+							<td><textarea name="docContent" cols="50" rows="13" >${doc.docContent }</textarea></td>
 							<td>&nbsp;</td>
 						</tr>
 						<tr height="1" bgcolor="#dddddd">

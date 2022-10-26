@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.side.wiki.HomeController;
@@ -45,13 +44,13 @@ public class DocumentController {
 		logger.info("getDoc 요청 들어옴");
 		model.addAttribute("doc", documentService.getDoc(vo));
 		return "docShow";
-
 	}
 
 	//문서 수정
 	@PostMapping("/updateDoc")
-	public String updateDoc() {
+	public String updateDoc(DocumentVO vo) {
 		logger.info("updateDoc 요청 들어옴");
+		documentService.updateDoc(vo);
 		return "home";
 	}
 

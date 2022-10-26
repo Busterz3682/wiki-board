@@ -13,7 +13,7 @@
 					<tr
 						style="text-align: center;">
 						<td width="5"></td>
-						<td>글쓰기</td>
+						<td>문서작성</td>
 						<td width="5">></td>
 					</tr>
 				</table>

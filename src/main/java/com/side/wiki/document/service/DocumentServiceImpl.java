@@ -26,8 +26,8 @@ public class DocumentServiceImpl implements DocumentService {
 
 	//문서 수정
 	@Override
-	public void updateDoc() {
-		
+	public void updateDoc(DocumentVO vo) {
+		documentDAO.updateDoc(vo);
 	}
 
 	//문서 삭제

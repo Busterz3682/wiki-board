@@ -11,7 +11,7 @@ public interface DocumentService {
 	//문서 조회
 	DocumentVO getDoc(DocumentVO vo);
 	//문서 수정
-	void updateDoc();
+	void updateDoc(DocumentVO vo);
 	//문서 삭제
 	void deleteDoc();
 }
