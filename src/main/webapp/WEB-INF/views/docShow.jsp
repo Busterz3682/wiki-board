@@ -1,5 +1,5 @@
 <%@page import="com.side.wiki.document.domain.DocumentVO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,9 +21,7 @@
 				<form action="/wiki/updateDoc" method="post">
 					<table>
 						<tr>
-							<td>&nbsp;</td>
-							<td><input type="hidden" value="${doc.docTitle }" name="docTitle">
-							</td>
+							<td>&nbsp;<input type="hidden" value="${doc.docTitle }" name="docTitle"></td>
 							<td align="center">제목</td>
 							<td>${doc.docTitle }</td>
 							<td>&nbsp;</td>
@@ -43,10 +41,12 @@
 						<tr height="1" bgcolor="#82B5DF">
 							<td colspan="4"></td>
 						</tr>
-						<tr align="right"><td>등록일시 - ${doc.docDate }</td></tr>
+						<td>등록일시 - ${doc.docDate }</td>
+						<tr align="right"></tr>
 						<tr align="center">
 							<td>&nbsp;</td>
 							<td colspan="2"><input type="submit" value="수정">
+							<td colspan="2"><input type="button" value="삭제">
 							<td>&nbsp;</td>
 						</tr>
 					</table>

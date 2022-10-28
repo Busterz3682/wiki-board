@@ -72,7 +72,17 @@ public class DocumentDAO {
 		}
 	}
 	//문서 삭제
-
+	public void deleteDoc(DocumentVO vo) {
+		conn = JDBCUtil.getConnection();
+		try {
+			stmt = conn.prepareStatement("delete from doc where doc_title=?");
+			stmt.setString(1, vo.getDocTitle());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(stmt, conn);
+		}
+	}
 
 
 }
