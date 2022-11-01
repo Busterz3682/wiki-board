@@ -43,7 +43,11 @@ public class DocumentController {
 	public String getDoc(DocumentVO vo, Model model) {
 		logger.info("getDoc 요청 들어옴");
 		model.addAttribute("doc", documentService.getDoc(vo));
-		return "docShow";
+		if(documentService.getDoc(vo).getDocTitle() != null) { //검색한 문서제목이 있으면 문서조회로
+			return "docShow";
+		} else { // 없으면 문서작성페이지로
+			return "docInput";
+		}
 	}
 
 	//문서 수정

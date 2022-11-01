@@ -1,10 +1,9 @@
-package com.side.wiki.document.service;
+package com.side.wiki.document.mapper;
 
 import com.side.wiki.document.domain.DocumentVO;
 
-public interface DocumentService {
+public interface DocumentMapper {
 
-	//구현해야 할 기능들(CRUD)
 	//문서 작성
 	void insertDoc(DocumentVO vo);
 	//문서 조회
@@ -13,4 +12,5 @@ public interface DocumentService {
 	void updateDoc(DocumentVO vo);
 	//문서 삭제
 	void deleteDoc();
+
 }
