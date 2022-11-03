@@ -6,11 +6,11 @@
 	<resultMap type="com.side.wiki.document.domain.DocumentVO" id="doc">
 		<result column="doc_title" property="docTitle" />
 		<result column="doc_content" property="docContent" />
-		<result column="doc_date" property="docDate" />
+		<result column="doc_date" property="docDate" javaType="java.util.Date" />
 		<result column="doc_id" property="docId" />
 	</resultMap>
 
-	<select id="getDoc"	resultType="com.side.wiki.document.domain.DocumentVO">
+	<select id="getDoc"	resultMap="doc">
 		select * from doc where doc_title = #{docTitle}
 	</select>
 </mapper>

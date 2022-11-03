@@ -42,10 +42,12 @@ public class DocumentController {
 	@GetMapping("/getDoc")
 	public String getDoc(DocumentVO vo, Model model) {
 		logger.info("getDoc 요청 들어옴");
-		model.addAttribute("doc", documentService.getDoc(vo));
-		if(documentService.getDoc(vo).getDocTitle() != null) { //검색한 문서제목이 있으면 문서조회로
+		DocumentVO test = documentService.getDoc(vo);
+		if(documentService.getDoc(vo).getDocTitle() != null) { 
+			model.addAttribute("doc", documentService.getDoc(vo));
 			return "docShow";
-		} else { // 없으면 문서작성페이지로
+		} else { 
+			model.addAttribute("doc", documentService.getDoc(vo));
 			return "docInput";
 		}
 	}
