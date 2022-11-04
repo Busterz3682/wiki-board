@@ -16,7 +16,7 @@
 221101 - xml설정 수정후 제대로 적용됨    
 221102 - mapper xml파일 작성 및 테스트          
 221103 - mapper 테스트중에 nullpointer exception 문제 -> 해결방법 찾는중 ->Controller 수정으로 해결                      
-221104 - 
+221104 - mapper에 나머지 sql 작성 및 추가하고싶은 기능 고민해보기   
 
 # 앞으로 작성할것 및 구현해보고싶은것
 
