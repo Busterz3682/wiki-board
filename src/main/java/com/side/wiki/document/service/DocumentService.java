@@ -12,5 +12,7 @@ public interface DocumentService {
 	//문서 수정
 	void updateDoc(DocumentVO vo);
 	//문서 삭제
-	void deleteDoc();
+	void deleteDoc(DocumentVO vo);
+	//랜덤 문서
+	DocumentVO getRandomDoc();
 }

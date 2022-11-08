@@ -35,8 +35,12 @@ public class DocumentServiceImpl implements DocumentService {
 
 	//문서 삭제
 	@Override
-	public void deleteDoc() {
-		
+	public void deleteDoc(DocumentVO vo) {
+		documentMapper.deleteDoc(vo);
+	}
+	
+	public DocumentVO getRandomDoc() {
+		return documentMapper.getRandomDoc();
 	}
 
 }

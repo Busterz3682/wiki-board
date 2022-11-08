@@ -42,13 +42,12 @@ public class DocumentController {
 	@GetMapping("/getDoc")
 	public String getDoc(DocumentVO vo, Model model) {
 		logger.info("getDoc 요청 들어옴");
-		DocumentVO test = documentService.getDoc(vo);
-		if(documentService.getDoc(vo).getDocTitle() != null) { 
-			model.addAttribute("doc", documentService.getDoc(vo));
-			return "docShow";
-		} else { 
-			model.addAttribute("doc", documentService.getDoc(vo));
+//		DocumentVO test = documentService.getDoc(vo);
+		model.addAttribute("doc", documentService.getDoc(vo));
+		if(documentService.getDoc(vo) == null) { 
 			return "docInput";
+		} else { 
+			return "docShow";
 		}
 	}
 
@@ -61,8 +60,20 @@ public class DocumentController {
 	}
 
 	//문서 삭제
-	public String deleteDoc() {
+	@PostMapping("/deleteDoc")
+	public String deleteDoc(DocumentVO vo) {
+		logger.info("deleteDoc 요청 들어옴");
+		documentService.deleteDoc(vo);
 		return "home";
+	}
+	
+	//랜덤 문서
+	@GetMapping("/getRandomDoc")
+	public String getRandomDoc(Model model) {
+		logger.info("getRandomDoc 요청 들어옴");
+		documentService.getRandomDoc();
+		model.addAttribute("doc", documentService.getRandomDoc());
+		return "docShow";
 	}
 
 }

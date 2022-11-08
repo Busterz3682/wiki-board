@@ -11,6 +11,7 @@ public interface DocumentMapper {
 	//문서 수정
 	void updateDoc(DocumentVO vo);
 	//문서 삭제
-	void deleteDoc();
-
+	void deleteDoc(DocumentVO vo);
+	//문서id 리스트 받아오기
+	DocumentVO getRandomDoc();
 }
