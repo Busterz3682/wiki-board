@@ -50,6 +50,7 @@
         itemSelectText: '',
       });
 
+      console.log(token);
     </script>
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

@@ -8,5 +8,6 @@
 </head>
 <body>
 	로그인성공
+	${test}
 </body>
 </html>

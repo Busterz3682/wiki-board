@@ -25,7 +25,7 @@
 <script>
   function loginWithKakao() {
     Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:8181',
+      redirectUri: 'http://localhost:8181/isLogin',
     });
   }
 
@@ -53,6 +53,8 @@
     var parts = document.cookie.split(name + '=');
     if (parts.length === 2) { return parts[1].split(';')[0]; }
   }
+  console.log(scope);
+  console.log()
 </script>
 </head>
 <body></body>
