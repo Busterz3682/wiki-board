@@ -39,6 +39,7 @@ public class DocumentServiceImpl implements DocumentService {
 		documentMapper.deleteDoc(vo);
 	}
 	
+	//·£´ý ¹®¼­
 	public DocumentVO getRandomDoc() {
 		return documentMapper.getRandomDoc();
 	}

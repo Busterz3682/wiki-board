@@ -25,11 +25,11 @@
 <script>
   function loginWithKakao() {
     Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:8181/isLogin',
+      redirectUri: 'http://localhost:8181/isLogin'
     });
   }
 
-  // 아래는 데모를 위한 UI 코드입니다.
+ // 아래는 데모를 위한 UI 코드입니다.
   displayToken()
   function displayToken() {
     var token = getCookie('authorize-access-token');
@@ -53,8 +53,7 @@
     var parts = document.cookie.split(name + '=');
     if (parts.length === 2) { return parts[1].split(';')[0]; }
   }
-  console.log(scope);
-  console.log()
+  
 </script>
 </head>
 <body></body>
