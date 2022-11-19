@@ -1,5 +1,7 @@
 package com.side.wiki.document.controller;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class DocumentController {
 	public String insertDoc(DocumentVO vo) {
 		logger.info("insertDoc 요청들어옴");
 		documentService.insertDoc(vo);
-		return "home";
+		return "redirect:/";
 	}
 
 	//문서 작성 페이지 이동
@@ -42,7 +44,6 @@ public class DocumentController {
 	@GetMapping("/getDoc")
 	public String getDoc(DocumentVO vo, Model model) {
 		logger.info("getDoc 요청 들어옴");
-//		DocumentVO test = documentService.getDoc(vo);
 		model.addAttribute("doc", documentService.getDoc(vo));
 		if(documentService.getDoc(vo) == null) { 
 			return "docInput";
@@ -56,7 +57,7 @@ public class DocumentController {
 	public String updateDoc(DocumentVO vo) {
 		logger.info("updateDoc 요청 들어옴");
 		documentService.updateDoc(vo);
-		return "home";
+		return "redirect:/";
 	}
 
 	//문서 삭제
@@ -64,7 +65,7 @@ public class DocumentController {
 	public String deleteDoc(DocumentVO vo) {
 		logger.info("deleteDoc 요청 들어옴");
 		documentService.deleteDoc(vo);
-		return "home";
+		return "redirect:/";
 	}
 	
 	//랜덤 문서
@@ -74,6 +75,16 @@ public class DocumentController {
 		documentService.getRandomDoc();
 		model.addAttribute("doc", documentService.getRandomDoc());
 		return "docShow";
+	}
+	
+	//문서목록
+	@GetMapping("/getDocList")
+	public String getdocList(Model model) {
+		logger.info("getDocList 요청 들어옴");
+		ArrayList<DocumentVO> doclist = (ArrayList<DocumentVO>)documentService.getDocList();
+		System.out.println(doclist);
+		model.addAttribute("doclist", doclist);
+		return "docList";
 	}
 
 }

@@ -17,16 +17,7 @@
         <div class="inner-form">
           <div class="input-field first-wrap">
             <div class="input-select">
-              <select data-trigger="">
-                <option placeholder="">Category</option>
-                <option>New Arrivals</option>
-                <option>Sale</option>
-                <option>Ladies</option>
-                <option>Men</option>
-                <option>Clothing</option>
-                <option>Footwear</option>
-                <option>Accessories</option>
-              </select>
+              
             </div>
           </div>
           <div class="input-field second-wrap">
@@ -41,16 +32,13 @@
           </div>
         </div>
       </form>
+      <button onclick="location.href='http://localhost:8181/wiki/getRandomDoc'">랜덤문서보기</button>
+      <button onclick="location.href='http://localhost:8181/wiki/insertDoc'">문서등록하기</button>
+      <button onclick="location.href='http://localhost:8181/wiki/getDocList'">전체문서보기</button>
     </div>
-    <script src="${pageContext.request.contextPath}/resources/js/extention/choices.js"></script>
+    <script src="js/extention/choices.js"></script>
     <script>
-      const choices = new Choices('[data-trigger]',
-      {
-        searchEnabled: false,
-        itemSelectText: '',
-      });
-
-      console.log(token);
+      
     </script>
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

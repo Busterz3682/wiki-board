@@ -36,6 +36,10 @@
 		(select * from doc order by dbms_random.value)
 		where rownum = 1
 	</select>
+	
+	<select id="getDocList" resultType="arraylist" resultMap="doc">
+		select * from doc
+	</select>
 
 
 </mapper>

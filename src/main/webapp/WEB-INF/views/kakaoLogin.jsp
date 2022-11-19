@@ -5,6 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <title>Kakao JavaScript SDK</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="scripts/main.js"></script>
   <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
   integrity="${INTEGRITY_VALUE}" crossorigin="anonymous"></script>
@@ -25,35 +26,14 @@
 <script>
   function loginWithKakao() {
     Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:8181/isLogin'
+      redirectUri: 'http://localhost:8181/kakao'
     });
   }
 
- // 아래는 데모를 위한 UI 코드입니다.
-  displayToken()
-  function displayToken() {
-    var token = getCookie('authorize-access-token');
-
-    if(token) {
-      Kakao.Auth.setAccessToken(token);
-      Kakao.Auth.getStatusInfo()
-        .then(function(res) {
-          if (res.status === 'connected') {
-            document.getElementById('token-result').innerText
-              = 'login success, token: ' + Kakao.Auth.getAccessToken();
-          }
-        })
-        .catch(function(err) {
-          Kakao.Auth.setAccessToken(null);
-        });
-    }
-  }
-
-  function getCookie(name) {
-    var parts = document.cookie.split(name + '=');
-    if (parts.length === 2) { return parts[1].split(';')[0]; }
-  }
+  let code =
   
+  console.log
+	
 </script>
 </head>
 <body></body>

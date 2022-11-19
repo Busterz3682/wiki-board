@@ -1,5 +1,7 @@
 package com.side.wiki.document.service;
 
+import java.util.List;
+
 import com.side.wiki.document.domain.DocumentVO;
 
 public interface DocumentService {
@@ -15,4 +17,6 @@ public interface DocumentService {
 	void deleteDoc(DocumentVO vo);
 	//랜덤 문서
 	DocumentVO getRandomDoc();
+	//문서 전체 조회
+	List<DocumentVO> getDocList();
 }

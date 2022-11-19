@@ -1,11 +1,6 @@
 package com.side.wiki.document.controller;
 
 import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +19,15 @@ public class TestController {
 	private KakaoService kakaoService;
 
 	//로그인페이지
-	@GetMapping("/kakao")
+	@GetMapping("/kakao2")
 	public String kakaoLogin() {
 		return "kakaoLogin";
+	}
+	
+	//카카오로그인2
+	@GetMapping("/kakao")
+	public String kakaoLogin2() {
+		return "kakaoLogin2";
 	}
 	
 	//로그인 검증?

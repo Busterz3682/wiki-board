@@ -76,7 +76,7 @@ public class KakaoServiceImpl implements KakaoService {
         return access_Token;
 		
 	}
-
+	
 	public HashMap<String, Object> getUserInfo (String access_Token) {
 	    
 	    //    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언

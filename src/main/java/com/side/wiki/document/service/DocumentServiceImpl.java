@@ -1,5 +1,7 @@
 package com.side.wiki.document.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +44,11 @@ public class DocumentServiceImpl implements DocumentService {
 	//·£´ý ¹®¼­
 	public DocumentVO getRandomDoc() {
 		return documentMapper.getRandomDoc();
+	}
+
+	@Override
+	public List<DocumentVO> getDocList() {
+		return documentMapper.getDocList();
 	}
 
 }

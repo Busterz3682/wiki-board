@@ -14,7 +14,7 @@
 						style="text-align: center;">
 						<td width="5"></td>
 						<td>문서작성</td>
-						<td width="5">></td>
+						<td width="5"></td>
 					</tr>
 				</table>
 				<form action="/wiki/insertDoc" method="post">

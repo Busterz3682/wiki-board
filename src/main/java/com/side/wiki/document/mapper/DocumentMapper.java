@@ -1,5 +1,7 @@
 package com.side.wiki.document.mapper;
 
+import java.util.List;
+
 import com.side.wiki.document.domain.DocumentVO;
 
 public interface DocumentMapper {
@@ -12,6 +14,8 @@ public interface DocumentMapper {
 	void updateDoc(DocumentVO vo);
 	//문서 삭제
 	void deleteDoc(DocumentVO vo);
-	//문서id 리스트 받아오기
+	//문서 id에 맞는 문서 받아오기
 	DocumentVO getRandomDoc();
+	//문서 목록 받아오기
+	List<DocumentVO> getDocList();
 }
