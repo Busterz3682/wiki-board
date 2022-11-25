@@ -1,4 +1,4 @@
-package com.side.wiki.document.controller;
+package com.side.wiki.controller;
 
 import java.util.HashMap;
 

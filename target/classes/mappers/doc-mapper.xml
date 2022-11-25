@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.side.wiki.document.mapper.DocumentMapper">
-	<resultMap type="com.side.wiki.document.domain.DocumentVO" id="doc">
+<mapper namespace="com.side.wiki.mapper.DocumentMapper">
+	<resultMap type="com.side.wiki.vo.DocumentVO" id="doc">
 		<result column="doc_title" property="docTitle" />
 		<result column="doc_content" property="docContent" />
 		<result column="doc_date" property="docDate"

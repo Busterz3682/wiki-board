@@ -1,8 +1,8 @@
-package com.side.wiki.document.mapper;
+package com.side.wiki.mapper;
 
 import java.util.List;
 
-import com.side.wiki.document.domain.DocumentVO;
+import com.side.wiki.vo.DocumentVO;
 
 public interface DocumentMapper {
 

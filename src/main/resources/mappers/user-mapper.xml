@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.side.wiki.mapper.UserMapper">
+		<!-- 회원가입 -->
+	<insert id="userJoin" parameterType="com.side.wiki.vo.UserVO">
+		insert into users values(#{email}, #{pw})
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="userLogin" parameterType="com.side.wiki.vo.UserVO" resultType="string">
+		select email from users
+		where email = #{email} and pw = #{pw}
+ 	</select>
+	
+</mapper>

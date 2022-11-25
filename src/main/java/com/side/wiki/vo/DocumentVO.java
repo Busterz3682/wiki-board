@@ -1,4 +1,4 @@
-package com.side.wiki.document.domain;
+package com.side.wiki.vo;
 
 import java.util.Date;
 

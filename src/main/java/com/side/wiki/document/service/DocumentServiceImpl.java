@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.side.wiki.document.domain.DocumentVO;
-import com.side.wiki.document.mapper.DocumentMapper;
+import com.side.wiki.mapper.DocumentMapper;
+import com.side.wiki.vo.DocumentVO;
 
 @Service
 public class DocumentServiceImpl implements DocumentService {

@@ -2,7 +2,7 @@ package com.side.wiki.document.service;
 
 import java.util.List;
 
-import com.side.wiki.document.domain.DocumentVO;
+import com.side.wiki.vo.DocumentVO;
 
 public interface DocumentService {
 

@@ -22,7 +22,7 @@
 	</bean>
 
 	<!-- mybatis scan -->
-	<mybatis-spring:scan base-package="com.side.wiki.**.mapper"/>
+	<mybatis-spring:scan base-package="com.side.wiki.mapper"/>
 	
 	
 </beans>

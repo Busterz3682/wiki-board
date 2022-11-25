@@ -1,4 +1,4 @@
-package com.side.wiki.document.controller;
+package com.side.wiki.controller;
 
 import java.util.ArrayList;
 
@@ -11,15 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.side.wiki.HomeController;
-import com.side.wiki.document.domain.DocumentVO;
 import com.side.wiki.document.service.DocumentService;
+import com.side.wiki.vo.DocumentVO;
 
 @Controller
 @RequestMapping("/wiki")
 public class DocumentController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(DocumentController.class);
 
 	@Autowired
 	private DocumentService documentService;
@@ -37,7 +36,7 @@ public class DocumentController {
 	@GetMapping("/insertDoc")
 	public String insertDocPage() {
 		logger.info("문서작성 페이지 이동");
-		return "docInput";
+		return "document/docInput";
 	}
 
 	//문서 조회
@@ -46,9 +45,9 @@ public class DocumentController {
 		logger.info("getDoc 요청 들어옴");
 		model.addAttribute("doc", documentService.getDoc(vo));
 		if(documentService.getDoc(vo) == null) { 
-			return "docInput";
+			return "document/docInput";
 		} else { 
-			return "docShow";
+			return "document/docShow";
 		}
 	}
 
@@ -74,7 +73,7 @@ public class DocumentController {
 		logger.info("getRandomDoc 요청 들어옴");
 		documentService.getRandomDoc();
 		model.addAttribute("doc", documentService.getRandomDoc());
-		return "docShow";
+		return "document/docShow";
 	}
 	
 	//문서목록
@@ -84,7 +83,7 @@ public class DocumentController {
 		ArrayList<DocumentVO> doclist = (ArrayList<DocumentVO>)documentService.getDocList();
 		System.out.println(doclist);
 		model.addAttribute("doclist", doclist);
-		return "docList";
+		return "document/docList";
 	}
 
 }
