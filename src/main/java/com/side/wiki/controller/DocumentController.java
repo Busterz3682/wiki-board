@@ -23,7 +23,6 @@ public class DocumentController {
 	@Autowired
 	private DocumentService documentService;
 
-	//구현해야 할 기능들(CRUD)
 	//문서 작성
 	@PostMapping("/insertDoc")
 	public String insertDoc(DocumentVO vo) {
@@ -81,9 +80,8 @@ public class DocumentController {
 	public String getdocList(Model model) {
 		logger.info("getDocList 요청 들어옴");
 		ArrayList<DocumentVO> doclist = (ArrayList<DocumentVO>)documentService.getDocList();
-		System.out.println(doclist);
 		model.addAttribute("doclist", doclist);
 		return "document/docList";
 	}
-
+	
 }

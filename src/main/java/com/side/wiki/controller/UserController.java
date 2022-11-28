@@ -29,13 +29,6 @@ public class UserController {
 		return "/board/loginPage";
 	}
 
-	@PostMapping("/userJoin")
-	public String userJoin(UserVO vo) {
-
-		userService.userJoin(vo);
-		return null;
-	}
-
 	//로그인
 	@PostMapping("/userLogin")
 	public String userLogin(UserVO vo, HttpSession session, HttpServletResponse response) {
@@ -47,5 +40,12 @@ public class UserController {
 		} else {
 			return "/board/loginfail";
 		}
+	}
+	
+	//회원가입
+	@PostMapping("/userJoin")
+	public String userJoin(UserVO vo) {
+		userService.userJoin(vo);
+		return null;
 	}
 }
