@@ -22,7 +22,7 @@
         	<c:forEach var="list" items="${doclist }">
             <tr>
                 <td>${list.docId }</td>
-                <td><a href="http://localhost:8181/board/debatedetail?docTitle=${list.docTitle}">${list.docTitle}</a></td>
+                <td><a href="http://localhost:8181/debate/debatedetail?docTitle=${list.docTitle}">${list.docTitle}</a></td>
                 <td>${list.docContent }</td>
                 <td>${list.docDate }</td>
             </tr>

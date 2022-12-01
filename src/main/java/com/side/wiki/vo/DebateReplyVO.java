@@ -23,4 +23,5 @@ public class DebateReplyVO {
 	private String email;
 	private String content;
 	private String regDate;
+	private int replyNo;
 }
