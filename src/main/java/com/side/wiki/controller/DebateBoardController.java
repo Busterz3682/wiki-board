@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.side.wiki.debateboard.service.DebateBoardService;
 import com.side.wiki.document.service.DocumentService;
@@ -30,7 +30,7 @@ public class DebateBoardController {
 	private DebateBoardService debateBoardService;
 
 	//문서토론목록페이지 이동
-	@GetMapping("/debate")
+	@GetMapping("/list")
 	public String getDocDebate(Model model) {
 		ArrayList<DocumentVO> doclist = (ArrayList<DocumentVO>) documentService.getDocList();
 		model.addAttribute("doclist", doclist);
@@ -41,13 +41,17 @@ public class DebateBoardController {
 	//문서토론 상세보기
 	@GetMapping("/debatedetail")
 	public String getDocDebateDetail(DebateReplyVO vo, Model model) {
+		log.info(vo.getDocTitle()+"에 대한 토론페이지 이동");
 		model.addAttribute("debatedetail", debateBoardService.getDetail(vo));
 		return "debate/boarddebate";
 	}
 	
 	@PostMapping("/insertreply")
-	public void insertReply(DebateReplyVO vo) {
-		debateBoardService.insertReply(vo);
+	@ResponseBody
+	public int insertReply(@ModelAttribute DebateReplyVO vo) {
+		log.info("댓글등록요청");
+		System.out.println(vo);
+		return debateBoardService.insertReply(vo);
 	}
 
 }

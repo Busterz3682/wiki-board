@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 	토론페이지
@@ -28,7 +30,42 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<textarea rows="3" cols="20" name="replycontent" id="replycontent"></textarea>
-	<button id="insertButton">댓글작성</button>
+	<textarea rows="3" cols="20" name="content" id="content"></textarea>
+	<button type="button" id="insertReplyBtn">댓글작성하기</button>
+	<input type="hidden" name="docTitle" id="docTitle"
+		value="${debatedetail[0].docTitle}">
+	<input type="hidden" name="email" id="email" value="Email-댓글작성테스트중">
 </body>
+<script>
+	//댓글 비동기 등록
+	window.onload = function() {
+		$('#insertReplyBtn').click(function() {
+			var docTitleA = $('#docTitle').val();
+			var emailA = $('#email').val();
+			var contentA = $('#content').val();
+			if (contentA === '') {
+				alert('내용을 입력해주세요');
+			} else {
+				$.ajax({
+					type : "POST",
+					url : "<c:url value='/debate/insertreply'/>",
+					dataType : "json",
+					data : {
+						docTitle : docTitleA,
+						email : emailA,
+						content : contentA
+					},
+					success : function(result) {
+						if (result == 1) {
+							alert('댓글등록성공');
+							location.reload();
+						} else {
+							alert('오류발생');
+						}
+					}
+				});
+			}
+		});
+	}
+</script>
 </html>

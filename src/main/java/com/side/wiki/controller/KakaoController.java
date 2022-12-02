@@ -13,21 +13,15 @@ import com.side.wiki.document.service.KakaoService;
 
 @Controller
 @RequestMapping("/")
-public class TestController {
+public class KakaoController {
 	
 	@Autowired
 	private KakaoService kakaoService;
-
-	//로그인페이지
-	@GetMapping("/kakao2")
-	public String kakaoLogin() {
-		return "kakaoLogin";
-	}
 	
-	//카카오로그인2
+	//카카오로그인
 	@GetMapping("/kakao")
 	public String kakaoLogin2() {
-		return "kakaoLogin2";
+		return "kakaoLogin";
 	}
 	
 	//로그인 검증?

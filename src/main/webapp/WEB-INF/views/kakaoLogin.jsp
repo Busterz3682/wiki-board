@@ -1,40 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <title>Kakao JavaScript SDK</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="scripts/main.js"></script>
-  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
-  integrity="${INTEGRITY_VALUE}" crossorigin="anonymous"></script>
-  <script>
-    // SDK∏¶ √ ±‚»≠ «’¥œ¥Ÿ. ªÁøÎ«“ æ€¿« JavaScript ≈∞∏¶ º≥¡§«ÿæﬂ «’¥œ¥Ÿ.
-    Kakao.init('ab255285e93608e5f37b506d95555b22');
-
-    // SDK √ ±‚»≠ ø©∫Œ∏¶ ∆«¥‹«’¥œ¥Ÿ.
-    console.log(Kakao.isInitialized());
-    
-  </script>
-  <a id="kakao-login-btn" href="javascript:loginWithKakao()">
-  <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
-    alt="ƒ´ƒ´ø¿ ∑Œ±◊¿Œ πˆ∆∞" />
-</a>
-<p id="token-result"></p>
-
-<script>
-  function loginWithKakao() {
-    Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:8181/kakao'
-    });
-  }
-
-  let code =
-  
-  console.log
-	
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
+	integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/"	crossorigin="anonymous">
 </script>
+<script>
+        Kakao.init('ab255285e93608e5f37b506d95555b22'); // ÏÇ¨Ïö©ÌïòÎ†§Îäî Ïï±Ïùò JavaScript ÌÇ§ ÏûÖÎ†•
+    </script>
 </head>
-<body></body>
+
+<body>
+
+
+	<a id="kakao-login-btn" href="javascript:loginWithKakao()"> 
+	<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222" alt="Ïπ¥Ïπ¥Ïò§ Î°úÍ∑∏Ïù∏ Î≤ÑÌäº" />
+	</a>
+	<script>
+	function loginWithKakao() {
+	    Kakao.Auth.authorize({
+	      redirectUri:'http://localhost:8181/isLogin',
+	    });
+	  }
+    </script>
+</body>
+
 </html>

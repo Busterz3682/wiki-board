@@ -30,13 +30,22 @@ public class UserTest {
 //		System.out.println("회원가입테스트");
 //	}
 	
+//	@Test
+//	public void userLoginTest() {
+//		UserVO vo = new UserVO();
+//		vo.setEmail("email1");
+//		vo.setPw("pw1");
+//		String a = userMapper.userLogin(vo);
+//		assertEquals("email1", "email1");
+//	}
+	
 	@Test
-	public void userLoginTest() {
+	public void userJoinTest() {
 		UserVO vo = new UserVO();
-		vo.setEmail("email1");
-		vo.setPw("pw1");
-		String a = userMapper.userLogin(vo);
-		assertEquals("email1", "email1");
+		vo.setEmail("a");
+		vo.setPw("b");
+		assertEquals(1, userMapper.userJoin(vo));
+		
 	}
 
 }

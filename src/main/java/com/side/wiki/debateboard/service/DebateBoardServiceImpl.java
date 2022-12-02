@@ -24,8 +24,8 @@ public class DebateBoardServiceImpl implements DebateBoardService {
 	}
 
 	@Override
-	public void insertReply(DebateReplyVO vo) {
-		debateBoardMapper.insertReply(vo);
+	public int insertReply(DebateReplyVO vo) {
+		return debateBoardMapper.insertReply(vo);
 	}
 	
 	

@@ -14,8 +14,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public int userJoin(UserVO vo) {
-		
-		return 0;
+		return userMapper.userJoin(vo);
 	}
 
 	@Override

@@ -26,8 +26,14 @@ public class UserController {
 	//로그인페이지
 	@GetMapping("/loginpage")
 	public String userLoginPage() {
-		return "/board/loginPage";
+		return "/user/loginPage";
 	}
+	//회원가입페이지
+	@GetMapping("/joinpage")
+	public String userJoinPage() {
+		return "/user/joinPage";
+	}
+	
 
 	//로그인
 	@PostMapping("/userLogin")
@@ -35,17 +41,18 @@ public class UserController {
 		System.out.println("login요청");
 		String loginemail = userService.userLogin(vo);
 		if(loginemail != null) {
+			session.setMaxInactiveInterval(60);
 			session.setAttribute("islogin", "yes");
-			return "/board/boardlist";
+			return "/user/loginsuccess";
 		} else {
-			return "/board/loginfail";
+			return "/user/loginfail";
 		}
 	}
 	
 	//회원가입
-	@PostMapping("/userJoin")
+	@PostMapping("/join")
 	public String userJoin(UserVO vo) {
 		userService.userJoin(vo);
-		return null;
+		return "redirect:/user/loginpage";
 	}
 }

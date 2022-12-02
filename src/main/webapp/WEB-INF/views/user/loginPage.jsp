@@ -9,8 +9,9 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="http://localhost:8181/user/userLogin" method="post">
+    <form action="/user/userLogin" method="post">
         <ul>
+        	<li>로그인페이지</li>
             <label for="">EMAIL</label>
             <li><input type="text" name="email" id="email"></li>
             <label for="">PW</label>

@@ -27,10 +27,16 @@ public class DebateBoardTest {
 //		debateBoardMapper.insertReply(vo);
 //		}
 //	}
+//	@Test
+//	public void getTest() {
+//		DebateReplyVO vo = new DebateReplyVO();
+//		vo.setDocTitle("Test Title1");
+//		System.out.println(debateBoardMapper.getDebateDetail(vo));
+//	}
+	
 	@Test
-	public void getTest() {
-		DebateReplyVO vo = new DebateReplyVO();
-		vo.setDocTitle("Test Title1");
-		System.out.println(debateBoardMapper.getDebateDetail(vo));
+	public void replyTest() {
+		DebateReplyVO vo = new DebateReplyVO("Test Title2", "AAA", "BBB", "a", 1);
+		debateBoardMapper.insertReply(vo);
 	}
 }

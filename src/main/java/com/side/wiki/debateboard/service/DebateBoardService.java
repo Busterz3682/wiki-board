@@ -10,6 +10,6 @@ public interface DebateBoardService {
 	public List<DebateReplyVO> getDetail(DebateReplyVO vo);
 
 	//¥Ò±€¿€º∫
-	public void insertReply(DebateReplyVO vo);
+	public int insertReply(DebateReplyVO vo);
 
 }

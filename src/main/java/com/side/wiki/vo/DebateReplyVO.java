@@ -1,6 +1,7 @@
 package com.side.wiki.vo;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 /*
  * CREATE TABLE DEBATEREPLY 
@@ -14,9 +15,12 @@ alter table debatereply
 add CONSTRAINT fk_debatereply 
 foreign key(doc_title) references doc (doc_title);
  */
+import lombok.NoArgsConstructor;
 
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class DebateReplyVO {
 
 	private String docTitle;
