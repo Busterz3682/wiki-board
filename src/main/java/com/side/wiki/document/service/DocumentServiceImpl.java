@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.side.wiki.mapper.DocumentMapper;
 import com.side.wiki.vo.DocumentVO;
+import com.side.wiki.vo.PagingVO;
 
 @Service
 public class DocumentServiceImpl implements DocumentService {
@@ -47,8 +48,13 @@ public class DocumentServiceImpl implements DocumentService {
 	}
 
 	@Override
-	public List<DocumentVO> getDocList() {
-		return documentMapper.getDocList();
+	public List<DocumentVO> getDocList(PagingVO vo) {
+		return documentMapper.getDocList(vo);
+	}
+
+	@Override
+	public int getTotalCount() {
+		return documentMapper.getTotalCount();
 	}
 
 }

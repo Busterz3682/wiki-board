@@ -37,8 +37,8 @@
 	<input type="hidden" name="email" id="email" value="Email-댓글작성테스트중">
 </body>
 <script>
-	//댓글 비동기 등록
 	window.onload = function() {
+		//댓글 등록 with ajax
 		$('#insertReplyBtn').click(function() {
 			var docTitleA = $('#docTitle').val();
 			var emailA = $('#email').val();

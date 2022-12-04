@@ -3,6 +3,7 @@ package com.side.wiki.document.service;
 import java.util.List;
 
 import com.side.wiki.vo.DocumentVO;
+import com.side.wiki.vo.PagingVO;
 
 public interface DocumentService {
 
@@ -18,5 +19,7 @@ public interface DocumentService {
 	//랜덤 문서
 	DocumentVO getRandomDoc();
 	//문서 전체 조회
-	List<DocumentVO> getDocList();
+	List<DocumentVO> getDocList(PagingVO vo);
+	//전체 게시물 수
+	int getTotalCount();
 }

@@ -41,7 +41,6 @@ public class UserController {
 		System.out.println("loginø‰√ª");
 		String loginemail = userService.userLogin(vo);
 		if(loginemail != null) {
-			session.setMaxInactiveInterval(60);
 			session.setAttribute("islogin", "yes");
 			return "/user/loginsuccess";
 		} else {

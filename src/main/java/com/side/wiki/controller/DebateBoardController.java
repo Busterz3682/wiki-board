@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.side.wiki.debateboard.service.DebateBoardService;
 import com.side.wiki.document.service.DocumentService;
 import com.side.wiki.vo.DebateReplyVO;
 import com.side.wiki.vo.DocumentVO;
+import com.side.wiki.vo.PagingVO;
 
 import lombok.extern.java.Log;
 
@@ -31,9 +33,15 @@ public class DebateBoardController {
 
 	//문서토론목록페이지 이동
 	@GetMapping("/list")
-	public String getDocDebate(Model model) {
-		ArrayList<DocumentVO> doclist = (ArrayList<DocumentVO>) documentService.getDocList();
+	public String getDocDebate(Model model, @RequestParam(required = false, defaultValue = "1") int currPage) {
+		int totalCount = documentService.getTotalCount();
+		int pageSize = 10;
+		int blockSize = 5;
+		PagingVO vo = new PagingVO(currPage, totalCount, pageSize, blockSize);
+		ArrayList<DocumentVO> doclist = (ArrayList<DocumentVO>) documentService.getDocList(vo);
 		model.addAttribute("doclist", doclist);
+		model.addAttribute("page", vo);
+		System.out.println(vo.getStartRow());
 		log.info("토론목록페이지");
 		return "debate/boardlist";
 	}
@@ -50,7 +58,6 @@ public class DebateBoardController {
 	@ResponseBody
 	public int insertReply(@ModelAttribute DebateReplyVO vo) {
 		log.info("댓글등록요청");
-		System.out.println(vo);
 		return debateBoardService.insertReply(vo);
 	}
 

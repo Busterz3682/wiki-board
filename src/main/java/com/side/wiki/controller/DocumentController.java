@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.side.wiki.document.service.DocumentService;
 import com.side.wiki.vo.DocumentVO;
+import com.side.wiki.vo.PagingVO;
 
 @Controller
 @RequestMapping("/wiki")
@@ -77,9 +79,13 @@ public class DocumentController {
 	
 	//문서목록
 	@GetMapping("/getDocList")
-	public String getdocList(Model model) {
+	public String getdocList(@RequestParam(required = false, defaultValue = "1") int currPage ,Model model) {
 		logger.info("getDocList 요청 들어옴");
-		ArrayList<DocumentVO> doclist = (ArrayList<DocumentVO>)documentService.getDocList();
+		int totalCount = documentService.getTotalCount();
+		int pageSize = 10;
+		int blockSize = 10;
+		PagingVO vo = new PagingVO(currPage, totalCount, pageSize, blockSize);
+		ArrayList<DocumentVO> doclist = (ArrayList<DocumentVO>) documentService.getDocList(vo);
 		model.addAttribute("doclist", doclist);
 		return "document/docList";
 	}

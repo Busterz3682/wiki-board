@@ -37,9 +37,18 @@
 		where rownum = 1
 	</select>
 	
-	<select id="getDocList" resultType="arraylist" resultMap="doc">
-		select * from doc
+	<select id="getDocList" resultType="arraylist" resultMap="doc" parameterType="com.side.wiki.vo.PagingVO">
+		select * 
+		from (select rownum as rnum, e.*
+			from (
+					select doc_title, doc_content, doc_date
+					from doc
+				  )e
+			) where rnum between #{startRow} and #{endRow}
 	</select>
 
+	<select id="getTotalCount" resultType="int">
+		select count(*) from doc
+	</select>
 
 </mapper>
