@@ -21,4 +21,6 @@ public interface DocumentMapper {
 	List<DocumentVO> getDocList(PagingVO vo);
 	//총 게시물수
 	int getTotalCount();
+	//비동기 검색
+	List<String> searchList(String search);
 }

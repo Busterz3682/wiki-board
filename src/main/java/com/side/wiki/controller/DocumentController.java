@@ -1,6 +1,7 @@
 package com.side.wiki.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,4 +91,11 @@ public class DocumentController {
 		return "document/docList";
 	}
 	
+	//비동기검색
+	@GetMapping("/searchDoc")
+	public List<String> searchList(String search){
+//		System.out.println("@@@@@@@@@@@@@@@"+search);
+		ArrayList<String> searchResult =  (ArrayList<String>) documentService.searchList(search);
+		return searchResult;
+	}
 }

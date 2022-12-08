@@ -1,8 +1,10 @@
 package com.side.wiki.vo;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString
 public class PagingVO {
 
 	private int currPage;

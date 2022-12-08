@@ -1,5 +1,6 @@
 package com.side.wiki.document.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.side.wiki.vo.DocumentVO;
@@ -22,4 +23,6 @@ public interface DocumentService {
 	List<DocumentVO> getDocList(PagingVO vo);
 	//전체 게시물 수
 	int getTotalCount();
+	//비동기 검색
+	List<String> searchList(String search);
 }

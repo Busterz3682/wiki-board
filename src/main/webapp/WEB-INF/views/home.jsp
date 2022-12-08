@@ -10,6 +10,8 @@
     <meta name="author" content="colorlib.com">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet" />
+    <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
   <body>
     <div class="s003">
@@ -38,7 +40,21 @@
     </div>
     <script src="js/extention/choices.js"></script>
     <script>
-      
+      $('#search').keyup(function(){
+    	  let s = $('#search').val()
+    	  console.log(s)
+    	  $.ajax({
+    		  type : 'get',
+    		  url : '/wiki/searchDoc',
+    		  data : {"search" : s},
+    		  success : function(result){
+    			  console.log(result)
+    		  },
+    		  error : function() {
+    			  console.log('no result')
+    		  }
+    	  })
+      })
     </script>
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

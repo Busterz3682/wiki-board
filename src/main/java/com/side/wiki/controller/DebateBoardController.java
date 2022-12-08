@@ -1,6 +1,7 @@
 package com.side.wiki.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,7 @@ public class DebateBoardController {
 
 	//문서토론목록페이지 이동
 	@GetMapping("/list")
-	public String getDocDebate(Model model, @RequestParam(required = false, defaultValue = "1") int currPage) {
+	public String getDocDebate(@RequestParam(required = false, defaultValue = "1", name = "currpage") int currPage, Model model) {
 		int totalCount = documentService.getTotalCount();
 		int pageSize = 10;
 		int blockSize = 5;
@@ -41,7 +42,6 @@ public class DebateBoardController {
 		ArrayList<DocumentVO> doclist = (ArrayList<DocumentVO>) documentService.getDocList(vo);
 		model.addAttribute("doclist", doclist);
 		model.addAttribute("page", vo);
-		System.out.println(vo.getStartRow());
 		log.info("토론목록페이지");
 		return "debate/boardlist";
 	}
@@ -54,11 +54,14 @@ public class DebateBoardController {
 		return "debate/boarddebate";
 	}
 	
+	//댓글입력
 	@PostMapping("/insertreply")
 	@ResponseBody
 	public int insertReply(@ModelAttribute DebateReplyVO vo) {
 		log.info("댓글등록요청");
 		return debateBoardService.insertReply(vo);
 	}
+	
+	
 
 }

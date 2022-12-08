@@ -17,16 +17,21 @@ public class DocumentTest {
 	@Autowired
 	private DocumentMapper mapper;
 	
+//	@Test
+//	public void docInputTest() {
+//		DocumentVO vo = new DocumentVO();
+//		
+//		for(int i=1; i<100; i++) {
+//			vo.setDocTitle("Test Title" + i);
+//			vo.setDocContent("Test Content" + i);
+//			mapper.insertDoc(vo);
+//		}
+//		
+//	}
+	
 	@Test
-	public void docInputTest() {
-		DocumentVO vo = new DocumentVO();
-		
-		for(int i=1; i<100; i++) {
-			vo.setDocTitle("Test Title" + i);
-			vo.setDocContent("Test Content" + i);
-			mapper.insertDoc(vo);
-		}
-		
+	public void searchTest() {
+		System.out.println(mapper.searchList("Test"));
 	}
 	
 }

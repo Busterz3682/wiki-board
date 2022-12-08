@@ -57,4 +57,9 @@ public class DocumentServiceImpl implements DocumentService {
 		return documentMapper.getTotalCount();
 	}
 
+	@Override
+	public List<String> searchList(String search) {
+		return documentMapper.searchList(search);
+	}
+
 }
