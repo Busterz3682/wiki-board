@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.side.wiki.document.service.DocumentService;
 import com.side.wiki.vo.DocumentVO;
@@ -92,10 +93,12 @@ public class DocumentController {
 	}
 	
 	//비동기검색
+	@ResponseBody
 	@GetMapping("/searchDoc")
 	public List<String> searchList(String search){
 //		System.out.println("@@@@@@@@@@@@@@@"+search);
 		ArrayList<String> searchResult =  (ArrayList<String>) documentService.searchList(search);
+		System.out.println(searchResult);
 		return searchResult;
 	}
 }

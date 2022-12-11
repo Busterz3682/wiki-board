@@ -24,6 +24,9 @@
           </div>
           <div class="input-field second-wrap">
             <input id="search" type="text" placeholder="Enter Keywords?" name="docTitle" />
+          	<ul id="searchResult">
+          		
+          	</ul>
           </div>
           <div class="input-field third-wrap">
             <button class="btn-search" type="submit">
@@ -48,13 +51,17 @@
     		  url : '/wiki/searchDoc',
     		  data : {"search" : s},
     		  success : function(result){
-    			  console.log(result)
+    			  console.log(result);
+    			  $('#searchResult').empty();
+    			  for(let i = 0; i < (result.length < 10 ? result.length : 10); i++) {
+    				  $('#searchResult').append("<li><a href='wiki/getDoc?docTitle="+result[i]+"'>"+result[i]+"</a></li>")
+    			  }
     		  },
     		  error : function() {
-    			  console.log('no result')
+    			  console.log('no result');
     		  }
-    	  })
-      })
+    	  });
+      });
     </script>
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
