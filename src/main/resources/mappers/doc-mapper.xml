@@ -41,7 +41,7 @@
 		select * 
 		from (select rownum as rnum, e.*
 			from (
-					select doc_title, doc_content, doc_date
+					select doc_id, doc_title, doc_content, doc_date
 					from doc
 				  )e
 			) where rnum between #{startRow} and #{endRow}

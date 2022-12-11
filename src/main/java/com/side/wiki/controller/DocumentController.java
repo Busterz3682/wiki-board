@@ -81,14 +81,15 @@ public class DocumentController {
 	
 	//문서목록
 	@GetMapping("/getDocList")
-	public String getdocList(@RequestParam(required = false, defaultValue = "1") int currPage ,Model model) {
+	public String getdocList(@RequestParam(required = false, defaultValue = "1", name="currpage") int currPage ,Model model) {
 		logger.info("getDocList 요청 들어옴");
 		int totalCount = documentService.getTotalCount();
 		int pageSize = 10;
-		int blockSize = 10;
+		int blockSize = 5;
 		PagingVO vo = new PagingVO(currPage, totalCount, pageSize, blockSize);
 		ArrayList<DocumentVO> doclist = (ArrayList<DocumentVO>) documentService.getDocList(vo);
 		model.addAttribute("doclist", doclist);
+		model.addAttribute("page", vo);
 		return "document/docList";
 	}
 	
@@ -96,7 +97,6 @@ public class DocumentController {
 	@ResponseBody
 	@GetMapping("/searchDoc")
 	public List<String> searchList(String search){
-//		System.out.println("@@@@@@@@@@@@@@@"+search);
 		ArrayList<String> searchResult =  (ArrayList<String>) documentService.searchList(search);
 		System.out.println(searchResult);
 		return searchResult;

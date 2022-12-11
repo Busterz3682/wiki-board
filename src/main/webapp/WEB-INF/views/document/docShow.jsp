@@ -32,7 +32,7 @@
 						<tr>
 							<td>&nbsp;</td>
 							<td align="center">내용</td>
-							<td><textarea name="docContent" cols="50" rows="13" >${doc.docContent }</textarea></td>
+							<td><textarea name="docContent" cols="70" rows="13" >${doc.docContent }</textarea></td>
 							<td>&nbsp;</td>
 						</tr>
 						<tr height="1" bgcolor="#dddddd">
