@@ -2,20 +2,24 @@ package com.side.wiki.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.side.wiki.vo.DetailVO;
 import com.side.wiki.vo.DocumentVO;
 import com.side.wiki.vo.PagingVO;
 
+@Mapper
 public interface DocumentMapper {
 
 	//문서 작성
 	void insertDoc(DocumentVO vo);
 	//문서 조회
-	DocumentVO getDoc(DocumentVO vo);
+	List<DocumentVO> getDoc(String docTitle);
 	//문서 수정
 	void updateDoc(DocumentVO vo);
 	//문서 삭제
 	void deleteDoc(DocumentVO vo);
-	//문서 id에 맞는 문서 받아오기
+	//랜덤 문서
 	DocumentVO getRandomDoc();
 	//문서 목록 받아오기
 	List<DocumentVO> getDocList(PagingVO vo);

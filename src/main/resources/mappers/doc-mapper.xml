@@ -3,22 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.side.wiki.mapper.DocumentMapper">
+	
 	<resultMap type="com.side.wiki.vo.DocumentVO" id="doc">
 		<result column="doc_title" property="docTitle" />
 		<result column="doc_content" property="docContent" />
-		<result column="doc_date" property="docDate"
-			javaType="java.util.Date" />
+		<result column="doc_date" property="docDate" javaType="java.util.Date" />
 		<result column="doc_id" property="docId" />
+		<result column="chapter_level" property="chapterLevel" />
+		<result column="chapter_index" property="chapterIndex" />
+		<result column="chapter_title" property="chapterTitle" />
+		<result column="detail_content" property="detailContent" />
 	</resultMap>
-
-	<select id="getDoc" resultMap="doc">
-		select * from doc where doc_title
-		= #{docTitle}
+	
+	<select id="getDoc" resultMap="doc" parameterType="string">
+		select d.doc_title as doc_title, doc_content, doc_date, doc_id, chapter_level, chapter_title, chapter_index, detail_content
+		from doc d, chapter c
+		where d.doc_title = c.doc_title
 	</select>
-
+	 
 	<insert id="insertDoc">
-		insert into doc(doc_title, doc_content, doc_id)
-		values(#{docTitle}, #{docContent}, doc_seq.nextval)
+		insert into doc(doc_title, doc_content, doc_date, doc_id)
+		values(#{docTitle}, #{docContent}, sysdate, doc_seq.nextval)
 	</insert>
 
 	<update id="updateDoc">

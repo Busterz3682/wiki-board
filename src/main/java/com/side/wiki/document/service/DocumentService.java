@@ -1,8 +1,8 @@
 package com.side.wiki.document.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.side.wiki.vo.DetailVO;
 import com.side.wiki.vo.DocumentVO;
 import com.side.wiki.vo.PagingVO;
 
@@ -12,7 +12,7 @@ public interface DocumentService {
 	//문서 작성
 	void insertDoc(DocumentVO vo);
 	//문서 조회
-	DocumentVO getDoc(DocumentVO vo);
+	List<DocumentVO> getDoc(String docTitle);
 	//문서 수정
 	void updateDoc(DocumentVO vo);
 	//문서 삭제

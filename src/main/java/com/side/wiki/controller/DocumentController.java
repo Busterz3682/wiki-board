@@ -44,10 +44,11 @@ public class DocumentController {
 
 	//문서 조회
 	@GetMapping("/getDoc")
-	public String getDoc(DocumentVO vo, Model model) {
+	public String getDoc(String docTitle, Model model) {
 		logger.info("getDoc 요청 들어옴");
-		model.addAttribute("doc", documentService.getDoc(vo));
-		if(documentService.getDoc(vo) == null) { 
+		model.addAttribute("doc", documentService.getDoc(docTitle));
+		System.out.println(documentService.getDoc(docTitle));
+		if(documentService.getDoc(docTitle) == null) { 
 			return "document/docInput";
 		} else { 
 			return "document/docShow";
@@ -88,6 +89,7 @@ public class DocumentController {
 		int blockSize = 5;
 		PagingVO vo = new PagingVO(currPage, totalCount, pageSize, blockSize);
 		ArrayList<DocumentVO> doclist = (ArrayList<DocumentVO>) documentService.getDocList(vo);
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("doclist", doclist);
 		model.addAttribute("page", vo);
 		return "document/docList";

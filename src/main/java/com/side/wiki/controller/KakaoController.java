@@ -39,7 +39,7 @@ public class KakaoController {
 	//디자인 템플릿 체크
 	@GetMapping("/designtest")
 	public String designTest() {
-		return "documents/docList";
+		return "maintest";
 	}
 		
 }

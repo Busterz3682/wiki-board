@@ -2,7 +2,9 @@ package com.side.wiki.vo;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /*
  CREATE TABLE DOC 
@@ -27,11 +29,17 @@ nocycle;
 
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class DocumentVO {
 
 	private String docTitle;
 	private String docContent;
 	private Date docDate;
 	private int docId;
+	private int chapterLevel;
+	private int chapterIndex;
+	private String chapterTitle;
+	private String detailContent;
 
 }

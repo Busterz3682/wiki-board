@@ -29,9 +29,14 @@ public class DocumentTest {
 //		
 //	}
 	
+//	@Test
+//	public void searchTest() {
+//		System.out.println(mapper.searchList("Test"));
+//	}
+	
 	@Test
-	public void searchTest() {
-		System.out.println(mapper.searchList("Test"));
+	public void docTest() {
+		System.out.println(mapper.getDoc("Test Title1"));
 	}
 	
 }

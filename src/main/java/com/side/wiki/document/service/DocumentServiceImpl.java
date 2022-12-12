@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.side.wiki.mapper.DocumentMapper;
+import com.side.wiki.vo.DetailVO;
 import com.side.wiki.vo.DocumentVO;
 import com.side.wiki.vo.PagingVO;
 
@@ -26,8 +27,8 @@ public class DocumentServiceImpl implements DocumentService {
 
 	//문서 조회
 	@Override
-	public DocumentVO getDoc(DocumentVO vo) {
-		return documentMapper.getDoc(vo);
+	public List<DocumentVO> getDoc(String docTitle) {
+		return documentMapper.getDoc(docTitle);
 	}
 
 	//문서 수정
@@ -61,5 +62,7 @@ public class DocumentServiceImpl implements DocumentService {
 	public List<String> searchList(String search) {
 		return documentMapper.searchList(search);
 	}
+
+	
 
 }
