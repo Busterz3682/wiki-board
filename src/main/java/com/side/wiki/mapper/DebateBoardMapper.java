@@ -7,7 +7,7 @@ import com.side.wiki.vo.DebateReplyVO;
 public interface DebateBoardMapper {
 
 	//토론페이지 문서제목 + 댓글 불러오기
-	public List<DebateReplyVO> getDebateDetail(DebateReplyVO vo);
+	public List<DebateReplyVO> getDebateDetail(String docTitle);
 	
 	//댓글 작성
 	public int insertReply(DebateReplyVO vo);

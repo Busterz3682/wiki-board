@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.side.wiki.document.service.DocumentService;
+import com.side.wiki.vo.ChapterVO;
 import com.side.wiki.vo.DocumentVO;
 import com.side.wiki.vo.PagingVO;
 
@@ -29,9 +31,11 @@ public class DocumentController {
 
 	//문서 작성
 	@PostMapping("/insertDoc")
-	public String insertDoc(DocumentVO vo) {
+	public String insertDoc(DocumentVO vo, ChapterVO vo2) {
 		logger.info("insertDoc 요청들어옴");
-		documentService.insertDoc(vo);
+		System.out.println(vo);
+		System.out.println(vo2);
+		documentService.insertDoc(vo, vo2);
 		return "redirect:/";
 	}
 
@@ -43,18 +47,24 @@ public class DocumentController {
 	}
 
 	//문서 조회
-	@GetMapping("/getDoc")
-	public String getDoc(String docTitle, Model model) {
+	@GetMapping("/getDoc/{docTitle}")
+	public String getDoc(@PathVariable String docTitle, Model model) {
 		logger.info("getDoc 요청 들어옴");
 		model.addAttribute("doc", documentService.getDoc(docTitle));
-		System.out.println(documentService.getDoc(docTitle));
-		if(documentService.getDoc(docTitle) == null) { 
-			return "document/docInput";
-		} else { 
-			return "document/docShow";
-		}
+		model.addAttribute("detail", documentService.getDetail(docTitle));
+		return "document/docShow";
 	}
 
+	//문서 수정 페이지
+	@GetMapping("/updateDoc/{docTitle}")
+	public String updateDocPage(@PathVariable String docTitle, Model model) {
+		model.addAttribute("doc", documentService.getDoc(docTitle));
+		model.addAttribute("detail", documentService.getDetail(docTitle));
+		System.out.println(documentService.getDoc(docTitle));
+		System.out.println(documentService.getDetail(docTitle));
+		return "document/docModify";
+	}
+	
 	//문서 수정
 	@PostMapping("/updateDoc")
 	public String updateDoc(DocumentVO vo) {

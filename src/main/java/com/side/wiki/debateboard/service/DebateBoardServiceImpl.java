@@ -19,8 +19,8 @@ public class DebateBoardServiceImpl implements DebateBoardService {
 	}
 	
 	@Override
-	public List<DebateReplyVO> getDetail(DebateReplyVO vo) {
-		return debateBoardMapper.getDebateDetail(vo);
+	public List<DebateReplyVO> getDetail(String docTitle) {
+		return debateBoardMapper.getDebateDetail(docTitle);
 	}
 
 	@Override

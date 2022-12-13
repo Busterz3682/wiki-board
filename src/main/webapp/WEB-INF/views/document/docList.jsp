@@ -102,7 +102,7 @@
 											<td>${list.docTitle}</td>
 											<td>${list.docDate }</td>
 											<td><a
-												href="http://localhost:8181/wiki/getDoc?docTitle=${list.docTitle}">상세보기</a></td>
+												href="http://localhost:8181/wiki/getDoc/${list.docTitle}">상세보기</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>

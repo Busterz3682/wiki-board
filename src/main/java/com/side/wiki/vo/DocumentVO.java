@@ -29,17 +29,16 @@ nocycle;
 
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class DocumentVO {
 
 	private String docTitle;
 	private String docContent;
 	private Date docDate;
 	private int docId;
-	private int chapterLevel;
 	private int chapterIndex;
 	private String chapterTitle;
-	private String detailContent;
+	private String chapterContent;
 
 }

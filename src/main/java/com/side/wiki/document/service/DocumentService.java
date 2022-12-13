@@ -2,7 +2,7 @@ package com.side.wiki.document.service;
 
 import java.util.List;
 
-import com.side.wiki.vo.DetailVO;
+import com.side.wiki.vo.ChapterVO;
 import com.side.wiki.vo.DocumentVO;
 import com.side.wiki.vo.PagingVO;
 
@@ -10,9 +10,10 @@ public interface DocumentService {
 
 	//구현해야 할 기능들(CRUD)
 	//문서 작성
-	void insertDoc(DocumentVO vo);
+	void insertDoc(DocumentVO vo, ChapterVO vo2);
 	//문서 조회
 	List<DocumentVO> getDoc(String docTitle);
+	List<ChapterVO> getDetail(String docTitle);
 	//문서 수정
 	void updateDoc(DocumentVO vo);
 	//문서 삭제

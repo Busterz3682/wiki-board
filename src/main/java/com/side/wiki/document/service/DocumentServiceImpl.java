@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.side.wiki.mapper.DocumentMapper;
-import com.side.wiki.vo.DetailVO;
+import com.side.wiki.vo.ChapterVO;
 import com.side.wiki.vo.DocumentVO;
 import com.side.wiki.vo.PagingVO;
 
@@ -21,14 +21,20 @@ public class DocumentServiceImpl implements DocumentService {
 	
 	//문서 작성
 	@Override
-	public void insertDoc(DocumentVO vo) {
+	public void insertDoc(DocumentVO vo, ChapterVO vo2) {
 		documentMapper.insertDoc(vo);
+		documentMapper.insertChapter(vo);
+		documentMapper.insertDetail(vo2);
 	}
 
 	//문서 조회
 	@Override
 	public List<DocumentVO> getDoc(String docTitle) {
 		return documentMapper.getDoc(docTitle);
+	}
+	@Override
+	public List<ChapterVO> getDetail(String docTitle) {
+		return documentMapper.getDetail(docTitle);
 	}
 
 	//문서 수정

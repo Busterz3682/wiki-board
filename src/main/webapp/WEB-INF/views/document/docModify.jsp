@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html class="no-js" lang="en">
+
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,8 +18,6 @@
 	href="${pageContext.request.contextPath}/resources/wikipedia-template/style.css">
 <script
 	src="${pageContext.request.contextPath}/resources/wikipedia-template/js/vendor/modernizr-2.8.3.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -57,8 +56,8 @@
 			<div class="tabs clearfix">
 				<div class="tabsLeft">
 					<ul>
-						<li><a href="http://localhost:8181/wiki/getDoc/${debatedetail[0].docTitle}">문서</a></li>
-						<li><a href="#" class="active">토론</a></li>
+						<li><a href="#" class="active">문서</a></li>
+						<li><a href="#">토론</a></li>
 					</ul>
 				</div>
 				<div id="simpleSearch">
@@ -76,9 +75,9 @@
 
 			</div>
 			<div class="article">
-				<h1>토론 : ${debatedetail[0].docTitle}</h1>
-				<p class="siteSub">이 페이지는 문서 제목 : ${debatedetail[0].docTitle} 에 대한 토론 페이지입니다</p>
-				<p class="roleNote"></p>
+				<h1>${doc[0].docTitle }</h1>
+				<p class="siteSub">이 문서의 마지막 수정 시간은 ${doc[0].docDate } 입니다</p>
+				<p class="roleNote">${doc[0].docContent }</p>
 
 				<div class="articleRight">
 					<div class="articleRightInner">
@@ -88,23 +87,23 @@
 					</div>
 					This is a blue <a href="">pencil</a>
 				</div>
-				<table>
-					<tbody>
-						<c:forEach var="item" items="${debatedetail }">
-							<tr>
-								<td>작성자 : ${item.email }</td>
-								<td>작성일 : ${item.regDate }</td>
-							</tr>
-							<tr>
-								<td colspan="2">내용 : ${item.content }</td>
-							</tr>
+				<div class="contentsPanel">
+					<div class="contentsHeader">목차</div>
+					<ul>
+						<c:forEach items="${doc }" var="item">
+							<li><span>${item.chapterIndex }</span><a href="#">${item.chapterTitle }</a></li>
 						</c:forEach>
-					</tbody>
-				</table>
-				<textarea rows="3" cols="40" name="content" id="content"></textarea>
-				<button type="button" id="insertReplyBtn">작성</button>
-				<input type="hidden" name="docTitle" id="docTitle" value="${debatedetail[0].docTitle}">
-				<input type="hidden" name="email" id="email" value="Email-댓글작성테스트중">
+					</ul>
+				</div>
+				<c:forEach items="${doc }" var="item">
+					<h2>${item.chapterIndex}.${item.chapterTitle }</h2>
+					<c:forEach items="${detail }" var="itemdt">
+						<c:if test="${item.chapterIndex == itemdt.chapterIndex }">
+							<p>${itemdt.chapterContent }</p>
+						</c:if>
+					</c:forEach>
+				</c:forEach>
+
 				<div class="lavenderBox">
 					<div class="header">여기는 추후에 추가예정</div>
 					<div class="subtitle linklist">
@@ -159,38 +158,8 @@
 	</script>
 	<script
 		src="${pageContext.request.contextPath}/resources/wikipedia-template/script.js"></script>
-	<script>
-	window.onload = function() {
-		//댓글 등록 with ajax
-		$('#insertReplyBtn').click(function() {
-			var docTitleA = $('#docTitle').val();
-			var emailA = $('#email').val();
-			var contentA = $('#content').val();
-			if (contentA === '') {
-				alert('내용을 입력해주세요');
-			} else {
-				$.ajax({
-					type : "POST",
-					url : "<c:url value='/debate/insertreply'/>",
-					dataType : "json",
-					data : {
-						docTitle : docTitleA,
-						email : emailA,
-						content : contentA
-					},
-					success : function(result) {
-						if (result == 1) {
-							alert('댓글등록성공');
-							location.reload();
-						} else {
-							alert('오류발생');
-						}
-					}
-				});
-			}
-		});
-	}
-	</script>
+
+
 </body>
 
 </html>

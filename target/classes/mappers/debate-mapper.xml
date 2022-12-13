@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.side.wiki.mapper.DebateBoardMapper">
 	
-	<select id="getDebateDetail" resultType="com.side.wiki.vo.DebateReplyVO">
+	<select id="getDebateDetail" resultType="com.side.wiki.vo.DebateReplyVO" parameterType="string">
 		select doc_title as docTitle, email, content, regdate 
 		from debatereply 
 		where doc_title = #{docTitle}
