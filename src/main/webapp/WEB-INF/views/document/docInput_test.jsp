@@ -22,20 +22,23 @@
 <script
 	src="${pageContext.request.contextPath}/resources/wikipedia-template/js/vendor/modernizr-2.8.3.min.js"></script>
 <script>
+/*
+ * 
 let ci = 2;
 function addChapter(){
 	  let addFrm = '<h2><input type="text" name="chapterTitle" id="chapterTitle" placeholder="목차를 입력해주세요" value="'+ ci +'"><input id="addChap" type="button" onClick="addChapter()" value="추가"></h2>'
-    +'<p><textarea name="chapterContent'+ci+'" id="chapterContent" cols="30" rows="10">'+ ci +'</textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">'
+    +'<p><textarea name="chapterContent" id="chapterContent" cols="30" rows="10">'+ci+'</textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">'
     +'<input type="hidden" name="chapterIndex" value="'+ ci +'">';
     $('#inputWrap').append(addFrm);
     ci++;
 	}
 
 function addContent(){
-	let addFrm = '<p><textarea name="chapterContent'+ (ci-1) +'" id="chapterContent" cols="30" rows="10">'+ (ci-1) +'</textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">';
+	let addFrm = '<p><textarea name="chapterContent" id="chapterContent" cols="30" rows="10">'+ci+'</textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">';
 	$('#inputWrap').append(addFrm);
 	
 }
+*/
 </script>	
 </head>
 
@@ -109,7 +112,20 @@ function addContent(){
 					<div id="inputWrap">
 				      <h2><input type="text" name="chapterTitle" id="chapterTitle" placeholder="목차를 입력해주세요"><input id="addChap" type="button" onClick="addChapter()" value="추가"></h2>
 				      <p><textarea name="chapterContent1" id="chapterContent" cols="30" rows="10"></textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">
+				      <p><textarea name="chapterContent1" id="chapterContent" cols="30" rows="10"></textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">
+				      <p><textarea name="chapterContent1" id="chapterContent" cols="30" rows="10"></textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">
+				      <p><textarea name="chapterContent1" id="chapterContent" cols="30" rows="10"></textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">
 				      <input type="hidden" name="chapterIndex" value="1">
+				      <h2><input type="text" name="chapterTitle" id="chapterTitle" placeholder="목차를 입력해주세요"><input id="addChap" type="button" onClick="addChapter()" value="추가"></h2>
+				      <p><textarea name="chapterContent2" id="chapterContent" cols="30" rows="10"></textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">
+				      <p><textarea name="chapterContent2" id="chapterContent" cols="30" rows="10"></textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">
+				      <p><textarea name="chapterContent2" id="chapterContent" cols="30" rows="10"></textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">
+				      <input type="hidden" name="chapterIndex" value="2">
+				      <h2><input type="text" name="chapterTitle" id="chapterTitle" placeholder="목차를 입력해주세요"><input id="addChap" type="button" onClick="addChapter()" value="추가"></h2>
+				      <p><textarea name="chapterContent3" id="chapterContent" cols="30" rows="10"></textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">
+				      <p><textarea name="chapterContent3" id="chapterContent" cols="30" rows="10"></textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">
+				      <p><textarea name="chapterContent3" id="chapterContent" cols="30" rows="10"></textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">
+				      <input type="hidden" name="chapterIndex" value="3">
 				    </div>
 				<button type="submit">등록하기</button>
 			</form>

@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChapterVO {
-
+public class DetailVO {
+	
 	private String docTitle;
 	private int chapterIndex;
-	private String chapterTitle;
+	private String chapterContent;
+
 }

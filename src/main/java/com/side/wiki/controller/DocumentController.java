@@ -1,7 +1,11 @@
 package com.side.wiki.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.side.wiki.document.service.DocumentService;
 import com.side.wiki.vo.ChapterVO;
+import com.side.wiki.vo.DetailVO;
 import com.side.wiki.vo.DocumentVO;
 import com.side.wiki.vo.PagingVO;
 
@@ -31,11 +36,22 @@ public class DocumentController {
 
 	//문서 작성
 	@PostMapping("/insertDoc")
-	public String insertDoc(DocumentVO vo, ChapterVO vo2) {
+	public String insertDoc(HttpServletRequest req) {
 		logger.info("insertDoc 요청들어옴");
-		System.out.println(vo);
-		System.out.println(vo2);
-		documentService.insertDoc(vo, vo2);
+		String docTitle = req.getParameter("docTitle");
+		String docContent = req.getParameter("docContent");
+		DocumentVO vo = new DocumentVO(docTitle, docContent, null, 0);
+		List<ChapterVO> cList = new ArrayList<ChapterVO>();
+		for(int i = 0; i < req.getParameterValues("chapterTitle").length; i ++) {
+			cList.add(new ChapterVO(docTitle, i + 1, req.getParameterValues("chapterTitle")[i]));
+		}
+		List<DetailVO> dList = new ArrayList<DetailVO>();
+		for(int i = 1; i <= req.getParameterValues("chapterTitle").length; i++) {
+			for(int j = 0; j < req.getParameterValues("chapterContent" + i).length; j ++) {
+				dList.add(new DetailVO(docTitle, i, req.getParameterValues("chapterContent" + i)[j]));
+			}
+		}
+		documentService.insertDoc(vo, cList, dList);
 		return "redirect:/";
 	}
 
@@ -52,6 +68,7 @@ public class DocumentController {
 		logger.info("getDoc 요청 들어옴");
 		model.addAttribute("doc", documentService.getDoc(docTitle));
 		model.addAttribute("detail", documentService.getDetail(docTitle));
+		model.addAttribute("chapter",  documentService.getChapter(docTitle));
 		return "document/docShow";
 	}
 
@@ -64,7 +81,7 @@ public class DocumentController {
 		System.out.println(documentService.getDetail(docTitle));
 		return "document/docModify";
 	}
-	
+
 	//문서 수정
 	@PostMapping("/updateDoc")
 	public String updateDoc(DocumentVO vo) {
@@ -80,7 +97,7 @@ public class DocumentController {
 		documentService.deleteDoc(vo);
 		return "redirect:/";
 	}
-	
+
 	//랜덤 문서
 	@GetMapping("/getRandomDoc")
 	public String getRandomDoc(Model model) {
@@ -89,7 +106,7 @@ public class DocumentController {
 		model.addAttribute("doc", documentService.getRandomDoc());
 		return "document/docShow";
 	}
-	
+
 	//문서목록
 	@GetMapping("/getDocList")
 	public String getdocList(@RequestParam(required = false, defaultValue = "1", name="currpage") int currPage ,Model model) {
@@ -104,7 +121,7 @@ public class DocumentController {
 		model.addAttribute("page", vo);
 		return "document/docList";
 	}
-	
+
 	//비동기검색
 	@ResponseBody
 	@GetMapping("/searchDoc")

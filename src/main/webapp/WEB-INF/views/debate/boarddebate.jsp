@@ -41,6 +41,7 @@
 				</ul>
 				<h3>Interaction</h3>
 				<ul>
+					<li><a href="http://localhost:8181/wiki/insertDoc">문서 작성</a></li>
 					<li><a href="#">도움말</a></li>
 					<li><a href="#">정책과 지침</a></li>
 				</ul>

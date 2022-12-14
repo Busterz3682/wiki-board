@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.side.wiki.mapper.DocumentMapper;
 import com.side.wiki.vo.ChapterVO;
+import com.side.wiki.vo.DetailVO;
 import com.side.wiki.vo.DocumentVO;
 import com.side.wiki.vo.PagingVO;
 
@@ -21,21 +23,31 @@ public class DocumentServiceImpl implements DocumentService {
 	
 	//문서 작성
 	@Override
-	public void insertDoc(DocumentVO vo, ChapterVO vo2) {
+	@Transactional
+	public void insertDoc(DocumentVO vo, List<ChapterVO> vo2, List<DetailVO> vo3) {
 		documentMapper.insertDoc(vo);
-		documentMapper.insertChapter(vo);
-		documentMapper.insertDetail(vo2);
+		for(ChapterVO item : vo2) {
+			documentMapper.insertChapter(item);
+		}
+		for(DetailVO item : vo3) {
+			documentMapper.insertDetail(item);
+		}
 	}
 
 	//문서 조회
 	@Override
-	public List<DocumentVO> getDoc(String docTitle) {
+	public DocumentVO getDoc(String docTitle) {
 		return documentMapper.getDoc(docTitle);
 	}
 	@Override
-	public List<ChapterVO> getDetail(String docTitle) {
+	public List<DetailVO> getDetail(String docTitle) {
 		return documentMapper.getDetail(docTitle);
 	}
+	@Override
+	public List<ChapterVO> getChapter(String docTitle) {
+		return documentMapper.getChapter(docTitle);
+	}
+
 
 	//문서 수정
 	@Override
@@ -69,6 +81,7 @@ public class DocumentServiceImpl implements DocumentService {
 		return documentMapper.searchList(search);
 	}
 
+	
 	
 
 }

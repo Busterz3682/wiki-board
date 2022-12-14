@@ -40,6 +40,7 @@
 				</ul>
 				<h3>Interaction</h3>
 				<ul>
+					<li><a href="http://localhost:8181/wiki/insertDoc">문서 작성</a></li>
 					<li><a href="#">도움말</a></li>
 					<li><a href="#">정책과 지침</a></li>
 				</ul>
@@ -57,7 +58,7 @@
 				<div class="tabsLeft">
 					<ul>
 						<li><a href="#" class="active">문서</a></li>
-						<li><a href="#">토론</a></li>
+						<li><a href="http://localhost:8181/debate/debatedetail/${doc.docTitle }">토론</a></li>
 					</ul>
 				</div>
 				<div id="simpleSearch">
@@ -75,9 +76,9 @@
 
 			</div>
 			<div class="article">
-				<h1>${doc[0].docTitle }</h1>
-				<p class="siteSub">이 문서의 마지막 수정 시간은 ${doc[0].docDate } 입니다</p>
-				<p class="roleNote">${doc[0].docContent }</p>
+				<h1>${doc.docTitle } <a href="http://localhost:8181/wiki/updateDoc/${doc.docTitle }">[편집]</a></h1>
+				<p class="siteSub">이 문서의 마지막 수정 시간은 ${doc.docDate } 입니다</p>
+				<p class="roleNote">${doc.docContent }</p>
 
 				<div class="articleRight">
 					<div class="articleRightInner">
@@ -90,12 +91,12 @@
 				<div class="contentsPanel">
 					<div class="contentsHeader">목차</div>
 					<ul>
-						<c:forEach items="${doc }" var="item">
+						<c:forEach items="${chapter }" var="item">
 							<li><span>${item.chapterIndex }</span><a href="#">${item.chapterTitle }</a></li>
 						</c:forEach>
 					</ul>
 				</div>
-				<c:forEach items="${doc }" var="item">
+				<c:forEach items="${chapter }" var="item">
 					<h2>${item.chapterIndex}.${item.chapterTitle }</h2>
 					<c:forEach items="${detail }" var="itemdt">
 						<c:if test="${item.chapterIndex == itemdt.chapterIndex }">

@@ -9,31 +9,37 @@
 		<result column="doc_content" property="docContent" />
 		<result column="doc_date" property="docDate" javaType="java.util.Date" />
 		<result column="doc_id" property="docId" />
-		<result column="chapter_index" property="chapterIndex" />
-		<result column="chapter_title" property="chapterTitle" />
-		<result column="chapter_content" property="chapterContent" />
 	</resultMap>
 	
 	<resultMap type="com.side.wiki.vo.ChapterVO" id="chapter">
 		<id column="doc_title" property="docTitle"/>
+		<result column="chapter_index" property="chapterIndex" />
+		<result column="chapter_title" property="chapterTitle" />
+	</resultMap>
+	
+	<resultMap type="com.side.wiki.vo.DetailVO" id="detail">
+		<result column="doc_title" property="docTitle"/>
 		<result column="chapter_index" property="chapterIndex"/>
 		<result column="chapter_content" property="chapterContent"/>
 	</resultMap>
 		
 	
 	<select id="getDoc" resultMap="doc" parameterType="string">
-		select d.doc_title, doc_content, doc_date, doc_id, chapter_title, c.chapter_index
-		from doc d inner join chapter c
-		on d.doc_title = c.doc_title
-		where d.doc_title = #{docTitle}
-		order by c.chapter_index
+		select * from doc
+		where doc_title = #{docTitle}
 	</select>
-	 
-	<select id="getDetail" resultMap="chapter" parameterType="string">
+	
+	<select id="getChapter" resultMap="chapter" parameterType="string">
+		select * from chapter
+		where doc_title = #{docTitle}
+	</select>
+	
+	<select id="getDetail" resultMap="detail" parameterType="string">
 		select * 
 		from detail
 		where doc_title = #{docTitle}
 	</select> 
+	  
 	 
 	<insert id="insertDoc">
 		insert into doc(doc_title, doc_content, doc_date, doc_id)

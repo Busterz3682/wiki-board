@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.side.wiki.vo.ChapterVO;
+import com.side.wiki.vo.DetailVO;
 import com.side.wiki.vo.DocumentVO;
 import com.side.wiki.vo.PagingVO;
 
@@ -13,13 +14,13 @@ public interface DocumentMapper {
 
 	//문서 작성
 	void insertDoc(DocumentVO vo);
-	void insertChapter(DocumentVO vo);
-	void insertDetail(ChapterVO vo2);
+	void insertChapter(ChapterVO vo);
+	void insertDetail(DetailVO vo);
 
 	//문서 조회
-	List<DocumentVO> getDoc(String docTitle);
-	List<ChapterVO> getDetail(String docTitle);
-	
+	DocumentVO getDoc(String docTitle);
+	List<DetailVO> getDetail(String docTitle);
+	List<ChapterVO> getChapter(String docTitle);
 	//문서 수정
 	void updateDoc(DocumentVO vo);
 	

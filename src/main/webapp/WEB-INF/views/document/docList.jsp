@@ -29,22 +29,15 @@
 			</div>
 			<div class="navigation">
 				<ul>
-					<li><a href="http://localhost:8181">대문</a></li>
+					<li><a href="http://localhost:8181">대문으로</a></li>
 					<li><a href="http://localhost:8181/wiki/getRandomDoc">임의의 문서로</a></li>
-					<li><a href="#">최근 바뀜</a></li>
 					<li><a href="http://localhost:8181/wiki/getDocList">전체 문서 목록으로</a></li>
 				</ul>
 				<h3>Interaction</h3>
 				<ul>
+					<li><a href="http://localhost:8181/wiki/insertDoc">문서 작성</a></li>
 					<li><a href="#">도움말</a></li>
 					<li><a href="#">정책과 지침</a></li>
-					<li><a href="#">Portal</a></li>
-				</ul>
-				<h3>Interaction</h3>
-				<ul>
-					<li><a href="#">Help</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Portal</a></li>
 				</ul>
 			</div>
 

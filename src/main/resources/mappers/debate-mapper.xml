@@ -5,14 +5,14 @@
 <mapper namespace="com.side.wiki.mapper.DebateBoardMapper">
 	
 	<select id="getDebateDetail" resultType="com.side.wiki.vo.DebateReplyVO" parameterType="string">
-		select doc_title as docTitle, email, content, regdate 
+		select doc_title as docTitle, content, regdate 
 		from debatereply 
 		where doc_title = #{docTitle}
 		order by reply_no
 	</select>
 
 	<insert id="insertReply" parameterType="com.side.wiki.vo.DebateReplyVO">
-		insert into debatereply(doc_title, reply_no, email, content, regdate) 
-		values(#{docTitle}, debatereply_seq.nextval, #{email}, #{content}, sysdate)
+		insert into debatereply(doc_title, reply_no, content, regdate) 
+		values(#{docTitle}, debatereply_seq.nextval, #{content}, sysdate)
 	</insert>
 </mapper>

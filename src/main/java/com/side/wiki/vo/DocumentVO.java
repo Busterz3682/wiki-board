@@ -37,8 +37,4 @@ public class DocumentVO {
 	private String docContent;
 	private Date docDate;
 	private int docId;
-	private int chapterIndex;
-	private String chapterTitle;
-	private String chapterContent;
-
 }

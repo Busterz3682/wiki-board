@@ -35,6 +35,7 @@
 				</ul>
 				<h3>Interaction</h3>
 				<ul>
+					<li><a href="http://localhost:8181/wiki/insertDoc">문서 작성</a></li>
 					<li><a href="#">도움말</a></li>
 					<li><a href="#">정책과 지침</a></li>
 				</ul>
@@ -103,7 +104,7 @@
     			  console.log(result);
     			  $('#searchResult').empty();
     			  for(let i = 0; i < (result.length < 10 ? result.length : 10); i++) {
-    				  $('#searchResult').append("<li><a href='wiki/getDoc?docTitle="+result[i]+"'>"+result[i]+"</a></li>")
+    				  $('#searchResult').append("<li><a href='wiki/getDoc/"+result[i]+"'>"+result[i]+"</a></li>")
     			  }
     		  },
     		  error : function() {

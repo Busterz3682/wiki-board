@@ -34,9 +34,9 @@ public class DebateBoardTest {
 //		System.out.println(debateBoardMapper.getDebateDetail(vo));
 //	}
 	
-	@Test
-	public void replyTest() {
-		DebateReplyVO vo = new DebateReplyVO("Test Title2", "AAA", "BBB", "a", 1);
-		debateBoardMapper.insertReply(vo);
-	}
+//	@Test
+//	public void replyTest() {
+//		DebateReplyVO vo = new DebateReplyVO("Test Title2", "AAA", "BBB", "a", 1);
+//		debateBoardMapper.insertReply(vo);
+//	}
 }
