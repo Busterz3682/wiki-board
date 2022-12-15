@@ -12,5 +12,5 @@ public class DetailVO {
 	private String docTitle;
 	private int chapterIndex;
 	private String chapterContent;
-
+	private int detailIndex;
 }

@@ -51,9 +51,11 @@
 		</div>
 		<div class="mainsection">
 			<div class="headerLinks">
-				<span class="user">Not logged in</span> <a href="#">Talk</a> <a
-					href="#">Contributions</a> <a href="#">Create account</a> <a
-					href="#">Log in</a>
+				<span class="user">Not logged in</span> <a href="#">Talk</a> <a href="#">Contributions</a> <a
+					href="#">Create account</a> <a href="#">Log in</a>
+					<ul id="searchResult">
+          		
+          			</ul>
 			</div>
 			<div class="tabs clearfix">
 				<div class="tabsLeft">
@@ -93,7 +95,6 @@
 					<tbody>
 						<c:forEach var="item" items="${debatedetail }">
 							<tr>
-								<td>작성자 : ${item.email }</td>
 								<td>작성일 : ${item.regDate }</td>
 							</tr>
 							<tr>
@@ -160,6 +161,7 @@
 	</script>
 	<script
 		src="${pageContext.request.contextPath}/resources/wikipedia-template/script.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/search.js"></script>
 	<script>
 	window.onload = function() {
 		//댓글 등록 with ajax

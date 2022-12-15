@@ -50,14 +50,16 @@
 		</div>
 		<div class="mainsection">
 			<div class="headerLinks">
-				<span class="user">Not logged in</span> <a href="#">Talk</a> <a
-					href="#">Contributions</a> <a href="#">Create account</a> <a
-					href="#">Log in</a>
+				<span class="user">Not logged in</span> <a href="#">Talk</a> <a href="#">Contributions</a> <a
+					href="#">Create account</a> <a href="#">Log in</a>
+					<ul id="searchResult">
+          		
+          			</ul>
 			</div>
 			<div class="tabs clearfix">
 				<div class="tabsLeft">
 					<ul>
-						<li><a href="#" class="active">문서</a></li>
+						<li><a href="http://localhost:8181/wiki/getDoc/${doc.docTitle }" class="active">문서</a></li>
 						<li><a href="http://localhost:8181/debate/debatedetail/${doc.docTitle }">토론</a></li>
 					</ul>
 				</div>
@@ -159,7 +161,7 @@
 	</script>
 	<script
 		src="${pageContext.request.contextPath}/resources/wikipedia-template/script.js"></script>
-
+	<script src="${pageContext.request.contextPath}/resources/js/search.js"></script>
 
 </body>
 

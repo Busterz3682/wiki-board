@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.side.wiki.vo.DetailVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -18,6 +21,22 @@
 	href="${pageContext.request.contextPath}/resources/wikipedia-template/style.css">
 <script
 	src="${pageContext.request.contextPath}/resources/wikipedia-template/js/vendor/modernizr-2.8.3.min.js"></script>
+<script>
+let ci = 2;
+function addChapter(){
+	  let addFrm = '<h2><input type="text" name="chapterTitle" id="chapterTitle" placeholder="목차를 입력해주세요" value="'+ ci +'"><input id="addChap" type="button" onClick="addChapter()" value="추가"></h2>'
+    +'<p><textarea name="chapterContent'+ci+'" id="chapterContent" cols="30" rows="10">'+ ci +'</textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">'
+    +'<input type="hidden" name="chapterIndex" value="'+ ci +'">';
+    $('#inputWrap').append(addFrm);
+    ci++;
+	}
+
+function addContent(){
+	let addFrm = '<p><textarea name="chapterContent'+ (ci-1) +'" id="chapterContent" cols="30" rows="10">'+ (ci-1) +'</textarea></p><input id="addCont" type="button" onClick="addContent()" value="추가">';
+	$('#inputWrap').append(addFrm);
+	
+}
+</script>	
 </head>
 
 <body>
@@ -38,7 +57,7 @@
 					<li><a href="http://localhost:8181/wiki/getRandomDoc">임의의 문서로</a></li>
 					<li><a href="http://localhost:8181/wiki/getDocList">전체 문서 목록으로</a></li>
 				</ul>
-				<h3>Interaction</h3>
+				<h3>Interaction</h3> 
 				<ul>
 					<li><a href="http://localhost:8181/wiki/insertDoc">문서 작성</a></li>
 					<li><a href="#">도움말</a></li>
@@ -50,14 +69,16 @@
 		</div>
 		<div class="mainsection">
 			<div class="headerLinks">
-				<span class="user">Not logged in</span> <a href="#">Talk</a> <a
-					href="#">Contributions</a> <a href="#">Create account</a> <a
-					href="#">Log in</a>
+				<span class="user">Not logged in</span> <a href="#">Talk</a> <a href="#">Contributions</a> <a
+					href="#">Create account</a> <a href="#">Log in</a>
+					<ul id="searchResult">
+          		
+          			</ul>
 			</div>
 			<div class="tabs clearfix">
 				<div class="tabsLeft">
 					<ul>
-						<li><a href="#" class="active">문서</a></li>
+						<li><a href="http://localhost:8181/wiki/getDoc/${doc.docTitle }" class="active">문서</a></li>
 						<li><a href="http://localhost:8181/debate/debatedetail/${doc.docTitle }">토론</a></li>
 					</ul>
 				</div>
@@ -76,62 +97,50 @@
 
 			</div>
 			<div class="article">
-				<h1>${doc.docTitle } <a href="http://localhost:8181/wiki/updateDoc/${doc.docTitle }">[편집]</a></h1>
-				<p class="siteSub">이 문서의 마지막 수정 시간은 ${doc.docDate } 입니다</p>
-				<p class="roleNote">${doc.docContent }</p>
+			<form method="post" action="http://localhost:8181/wiki/updateDoc">
+				<h1><input type="text" name="docTitle" id="docTitle" value="${doc.docTitle}" readonly="readonly"></h1>
+				<p class="siteSub">위키백과, 우리 모두의 백과사전.</p>
+				<p class="roleNote"><input type="text" name="docContent" id="docContent" value="${doc.docContent }"></p>
 
 				<div class="articleRight">
 					<div class="articleRightInner">
-						<img
-							src="${pageContext.request.contextPath}/resources/wikipedia-template/img/pencil.jpg"
-							alt="pencil" />
+						<img src="img/pencil.jpg" alt="pencil" />
 					</div>
 					This is a blue <a href="">pencil</a>
 				</div>
-				<div class="contentsPanel">
-					<div class="contentsHeader">목차</div>
-					<ul>
-						<c:forEach items="${chapter }" var="item">
-							<li><span>${item.chapterIndex }</span><a href="#">${item.chapterTitle }</a></li>
-						</c:forEach>
-					</ul>
-				</div>
 				<c:forEach items="${chapter }" var="item">
-					<h2>${item.chapterIndex}.${item.chapterTitle }</h2>
+					<h2><input type="text" name="chapterTitle" id="chapterTitle" value="${item.chapterTitle }"></h2>
 					<c:forEach items="${detail }" var="itemdt">
 						<c:if test="${item.chapterIndex == itemdt.chapterIndex }">
-							<p>${itemdt.chapterContent }</p>
+							<p><textarea name="chapterContent${item.chapterIndex }" id="chapterContent" cols="30" rows="10">${itemdt.chapterContent }</textarea>
+								<input type="hidden" name="detailIndex" value="${itemdt.detailIndex }">
+							</p>
 						</c:if>
 					</c:forEach>
 				</c:forEach>
-
+				<button type="submit">등록하기</button>
+			</form>
 				<div class="lavenderBox">
-					<div class="header">여기는 추후에 추가예정</div>
-					<div class="subtitle linklist">
-						<a href="#">여기는</a> <a href="#">뭐할지</a> <a href="#">고민중</a>
-					</div>
+					<div class="header">Panel title</div>
+					<div class="subtitle linklist"><a href="#">Lorem</a> <a href="#">Ipsum</a> <a
+							href="#">Dolorestitas</a> </div>
 					<div class="linklist">
-						<a href="#">Percipit </a> <a href="#">Mnesarchum </a> <a href="#">Molestie
-						</a> <a href="#">Phaedrum </a> <a href="#">Luptatum constituam </a> <a
-							href="#">Habeo adipisci </a> <a href="#">Inani zril </a> <a
-							href="#">Forensibus sea </a> <a href="#">Habeo adipisci </a> <a
-							href="#">Minimum corrumpit </a> <a href="#">Regione suscipit
-						</a> <a href="#">Has et partem </a><a href="#">Percipit </a> <a
-							href="#">Mnesarchum </a> <a href="#">Molestie </a> <a href="#">Phaedrum
-						</a> <a href="#">Luptatum constituam </a> <a href="#">Habeo
-							adipisci </a> <a href="#">Inani zril </a> <a href="#">Vel nisl
-							albucius </a> <a href="#">Habeo adipisci </a> <a href="#">Minimum
-							corrumpit </a> <a href="#">Regione suscipit </a> <a href="#">Percipit
-							maiestatis </a> <a href="#">Regione suscipit </a> <a href="#">Percipit
-							maiestatis </a>
+						<a href="#">Percipit </a> <a href="#">Mnesarchum </a> <a href="#">Molestie </a> <a
+							href="#">Phaedrum </a> <a href="#">Luptatum constituam </a> <a href="#">Habeo adipisci </a>
+						<a href="#">Inani zril </a> <a href="#">Forensibus sea </a> <a href="#">Habeo adipisci </a> <a
+							href="#">Minimum corrumpit </a> <a href="#">Regione suscipit </a> <a href="#">Has et partem
+						</a><a href="#">Percipit </a> <a href="#">Mnesarchum </a> <a href="#">Molestie </a> <a
+							href="#">Phaedrum </a> <a href="#">Luptatum constituam </a> <a href="#">Habeo adipisci </a>
+						<a href="#">Inani zril </a> <a href="#">Vel nisl albucius </a> <a href="#">Habeo adipisci </a>
+						<a href="#">Minimum corrumpit </a> <a href="#">Regione suscipit </a> <a href="#">Percipit
+							maiestatis </a> <a href="#">Regione suscipit </a> <a href="#">Percipit maiestatis </a>
 					</div>
 
 					<div class="subtitle">Subtitle</div>
 				</div>
 
 				<div class="categories">
-					<a href="#">Minimum corrumpit </a> <a href="#">Regione suscipit
-					</a> <a href="#">Has et partem </a>
+					<a href="#">Minimum corrumpit </a> <a href="#">Regione suscipit </a> <a href="#">Has et partem </a>
 				</div>
 
 			</div>
@@ -159,7 +168,7 @@
 	</script>
 	<script
 		src="${pageContext.request.contextPath}/resources/wikipedia-template/script.js"></script>
-
+	<script src="${pageContext.request.contextPath}/resources/js/search.js"></script>
 
 </body>
 

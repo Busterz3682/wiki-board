@@ -17,7 +17,7 @@ public interface DocumentService {
 	List<DetailVO> getDetail(String docTitle);
 	List<ChapterVO> getChapter(String docTitle);
 	//문서 수정
-	void updateDoc(DocumentVO vo);
+	void updateDoc(DocumentVO vo, List<ChapterVO> vo2, List<DetailVO> vo3);
 	//문서 삭제
 	void deleteDoc(DocumentVO vo);
 	//랜덤 문서

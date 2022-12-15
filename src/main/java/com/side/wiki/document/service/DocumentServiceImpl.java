@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.side.wiki.mapper.DebateBoardMapper;
 import com.side.wiki.mapper.DocumentMapper;
 import com.side.wiki.vo.ChapterVO;
 import com.side.wiki.vo.DetailVO;
@@ -21,11 +22,15 @@ public class DocumentServiceImpl implements DocumentService {
 	@Autowired
 	private DocumentMapper documentMapper;
 	
+	@Autowired
+	private DebateBoardMapper debateBoardMapper;
+	
 	//문서 작성
 	@Override
 	@Transactional
 	public void insertDoc(DocumentVO vo, List<ChapterVO> vo2, List<DetailVO> vo3) {
 		documentMapper.insertDoc(vo);
+		debateBoardMapper.makeDebatePage(vo.getDocTitle());
 		for(ChapterVO item : vo2) {
 			documentMapper.insertChapter(item);
 		}
@@ -51,8 +56,15 @@ public class DocumentServiceImpl implements DocumentService {
 
 	//문서 수정
 	@Override
-	public void updateDoc(DocumentVO vo) {
+	@Transactional
+	public void updateDoc(DocumentVO vo, List<ChapterVO> vo2, List<DetailVO> vo3) {
 		documentMapper.updateDoc(vo);
+		for(ChapterVO item : vo2) {
+			documentMapper.updateChapter(item);
+		}
+		for(DetailVO item : vo3) {
+			documentMapper.updateDetail(item);
+		}
 	}
 
 	//문서 삭제

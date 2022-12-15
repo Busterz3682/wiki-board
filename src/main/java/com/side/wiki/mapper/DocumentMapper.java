@@ -21,8 +21,11 @@ public interface DocumentMapper {
 	DocumentVO getDoc(String docTitle);
 	List<DetailVO> getDetail(String docTitle);
 	List<ChapterVO> getChapter(String docTitle);
+	
 	//문서 수정
 	void updateDoc(DocumentVO vo);
+	void updateChapter(ChapterVO vo);
+	void updateDetail(DetailVO vo);
 	
 	//문서 삭제
 	void deleteDoc(DocumentVO vo);

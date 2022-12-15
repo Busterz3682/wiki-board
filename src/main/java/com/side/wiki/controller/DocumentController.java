@@ -34,6 +34,13 @@ public class DocumentController {
 	@Autowired
 	private DocumentService documentService;
 
+	//문서 작성 페이지 이동
+	@GetMapping("/insertDoc")
+	public String insertDocPage() {
+		logger.info("문서작성 페이지 이동");
+		return "document/docInput";
+	}
+
 	//문서 작성
 	@PostMapping("/insertDoc")
 	public String insertDoc(HttpServletRequest req) {
@@ -48,18 +55,11 @@ public class DocumentController {
 		List<DetailVO> dList = new ArrayList<DetailVO>();
 		for(int i = 1; i <= req.getParameterValues("chapterTitle").length; i++) {
 			for(int j = 0; j < req.getParameterValues("chapterContent" + i).length; j ++) {
-				dList.add(new DetailVO(docTitle, i, req.getParameterValues("chapterContent" + i)[j]));
+				dList.add(new DetailVO(docTitle, i, req.getParameterValues("chapterContent" + i)[j], j + 1));
 			}
 		}
 		documentService.insertDoc(vo, cList, dList);
 		return "redirect:/";
-	}
-
-	//문서 작성 페이지 이동
-	@GetMapping("/insertDoc")
-	public String insertDocPage() {
-		logger.info("문서작성 페이지 이동");
-		return "document/docInput";
 	}
 
 	//문서 조회
@@ -77,16 +77,30 @@ public class DocumentController {
 	public String updateDocPage(@PathVariable String docTitle, Model model) {
 		model.addAttribute("doc", documentService.getDoc(docTitle));
 		model.addAttribute("detail", documentService.getDetail(docTitle));
-		System.out.println(documentService.getDoc(docTitle));
-		System.out.println(documentService.getDetail(docTitle));
+		model.addAttribute("chapter",  documentService.getChapter(docTitle));
 		return "document/docModify";
 	}
 
 	//문서 수정
 	@PostMapping("/updateDoc")
-	public String updateDoc(DocumentVO vo) {
+	public String updateDoc(HttpServletRequest req) {
 		logger.info("updateDoc 요청 들어옴");
-		documentService.updateDoc(vo);
+		String docTitle = req.getParameter("docTitle");
+		String docContent = req.getParameter("docContent");
+		DocumentVO vo = new DocumentVO(docTitle, docContent, null, 0);
+		List<ChapterVO> cList = new ArrayList<ChapterVO>();
+		for(int i = 0; i < req.getParameterValues("chapterTitle").length; i ++) {
+			cList.add(new ChapterVO(docTitle, i + 1, req.getParameterValues("chapterTitle")[i]));
+		}
+		List<DetailVO> dList = new ArrayList<DetailVO>();
+		for(int i = 1; i <= req.getParameterValues("chapterTitle").length; i++) {
+			for(int j = 0; j < req.getParameterValues("chapterContent" + i).length; j ++) {
+				dList.add(new DetailVO(docTitle, i, req.getParameterValues("chapterContent" + i)[j], j + 1));
+			}
+		}
+		System.out.println(cList);
+		System.out.println(dList);
+		documentService.updateDoc(vo, cList, dList);
 		return "redirect:/";
 	}
 
@@ -113,7 +127,7 @@ public class DocumentController {
 		logger.info("getDocList 요청 들어옴");
 		int totalCount = documentService.getTotalCount();
 		int pageSize = 10;
-		int blockSize = 5;
+		int blockSize = 10;
 		PagingVO vo = new PagingVO(currPage, totalCount, pageSize, blockSize);
 		ArrayList<DocumentVO> doclist = (ArrayList<DocumentVO>) documentService.getDocList(vo);
 		model.addAttribute("totalCount", totalCount);

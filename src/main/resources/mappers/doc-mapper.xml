@@ -21,6 +21,7 @@
 		<result column="doc_title" property="docTitle"/>
 		<result column="chapter_index" property="chapterIndex"/>
 		<result column="chapter_content" property="chapterContent"/>
+		<result column="detail_index" property="detailIndex"/>
 	</resultMap>
 		
 	
@@ -52,13 +53,23 @@
 	</insert>
 	
 	<insert id="insertDetail">
-		insert into detail(doc_title, chapter_content, chapter_index)
-		values(#{docTitle}, #{chapterContent}, #{chapterIndex})
+		insert into detail(doc_title, chapter_content, chapter_index, detail_index)
+		values(#{docTitle}, #{chapterContent}, #{chapterIndex}, #{detailIndex})
 	</insert>
 
 	<update id="updateDoc">
 		update doc set doc_content = #{docContent}, doc_date
 		= sysdate where doc_title = #{docTitle}
+	</update>
+
+	<update id="updateChapter">
+		update chapter set chapter_title = #{chapterTitle}
+		where doc_title = #{docTitle} and chapter_index = #{chapterIndex}
+	</update>
+
+	<update id="updateDetail">
+		update detail set chapter_content = #{chapterContent}
+		where doc_title = #{docTitle} and chapter_index = #{chapterIndex} and detail_index = #{detailIndex}
 	</update>
 
 	<delete id="deleteDoc">
@@ -78,6 +89,7 @@
 			from (
 					select doc_id, doc_title, doc_content, doc_date
 					from doc
+					order by doc_date desc
 				  )e
 			) where rnum between #{startRow} and #{endRow}
 	</select>

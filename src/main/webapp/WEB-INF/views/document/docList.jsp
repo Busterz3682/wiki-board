@@ -48,6 +48,9 @@
 			<div class="headerLinks">
 				<span class="user">Not logged in</span> <a href="#">Talk</a> <a href="#">Contributions</a> <a
 					href="#">Create account</a> <a href="#">Log in</a>
+					<ul id="searchResult">
+          		
+          			</ul>
 			</div>
 			<div class="tabs clearfix">
 				<div class="tabsLeft">
@@ -72,7 +75,7 @@
 			<div class="article">
 				<h1>전체 문서 목록</h1>
 				<p class="siteSub">현재 ${totalCount }개의 문서가 등록되어있습니다</p>
-				<p class="roleNote">간단한 소개</p>
+				<p class="roleNote">최근 등록(혹은 수정)된 순서대로 보여집니다</p>
 
 				
 				<div class="content">
@@ -141,7 +144,7 @@
 		window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')
 	</script>
 	<script src="script.js"></script>
-
+	<script src="${pageContext.request.contextPath}/resources/js/search.js"></script>
 
 </body>
 

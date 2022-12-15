@@ -10,6 +10,10 @@
 		where doc_title = #{docTitle}
 		order by reply_no
 	</select>
+	
+	<insert id="makeDebatePage">
+		insert into debatereply (doc_title) values (#{docTitle})
+	</insert>
 
 	<insert id="insertReply" parameterType="com.side.wiki.vo.DebateReplyVO">
 		insert into debatereply(doc_title, reply_no, content, regdate) 
