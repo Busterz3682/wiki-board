@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.side.wiki.document.service.KakaoService;
+import com.side.wiki.document.service.TestService;
 
 @Controller
 @RequestMapping("/")
-public class KakaoController {
+public class TestController {
 	
 	@Autowired
-	private KakaoService kakaoService;
+	private TestService kakaoService;
 	
 	//카카오로그인
 	@GetMapping("/kakao")

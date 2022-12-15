@@ -12,4 +12,6 @@ public interface DebateBoardService {
 	//¥Ò±€¿€º∫
 	public int insertReply(DebateReplyVO vo);
 
+	public int deleteReply(DebateReplyVO vo);
+
 }

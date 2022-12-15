@@ -27,6 +27,11 @@ public class DebateBoardServiceImpl implements DebateBoardService {
 	public int insertReply(DebateReplyVO vo) {
 		return debateBoardMapper.insertReply(vo);
 	}
+
+	@Override
+	public int deleteReply(DebateReplyVO vo) {
+		return debateBoardMapper.deleteReply(vo);
+	}
 	
 	
 

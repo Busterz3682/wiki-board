@@ -16,7 +16,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Service
-public class KakaoServiceImpl implements KakaoService {
+public class TestServiceImpl implements TestService {
 
 	@Override
 	public String getToken(String code) {

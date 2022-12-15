@@ -15,6 +15,9 @@ public interface DebateBoardMapper {
 	//¥Ò±€ ¿€º∫
 	int insertReply(DebateReplyVO vo);
 
+	//¥Ò±€ ªË¡¶
+	int deleteReply(DebateReplyVO vo);
+
 	
 	
 	

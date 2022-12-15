@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
-public interface KakaoService {
+public interface TestService {
 	
 	public String getToken(@RequestParam("code") String code);
 	

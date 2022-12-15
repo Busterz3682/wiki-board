@@ -24,7 +24,9 @@ import lombok.NoArgsConstructor;
 public class DebateReplyVO {
 
 	private String docTitle;
+	private String writer;
 	private String content;
 	private String regDate;
 	private int replyNo;
+	private String password;
 }

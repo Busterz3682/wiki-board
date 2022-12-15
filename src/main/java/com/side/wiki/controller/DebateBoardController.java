@@ -41,11 +41,17 @@ public class DebateBoardController {
 	//¥Ò±€¿‘∑¬
 	@PostMapping("/insertreply")
 	@ResponseBody
-	public int insertReply(@ModelAttribute DebateReplyVO vo) {
+	public int insertReply(DebateReplyVO vo) {
 		log.info("¥Ò±€µÓ∑œø‰√ª");
 		return debateBoardService.insertReply(vo);
 	}
 	
+	//¥Ò±€ªË¡¶
+	@PostMapping("/deletereply")
+	@ResponseBody
+	public int deleteReply(DebateReplyVO vo) {
+		return debateBoardService.deleteReply(vo);
+	}
 	
 
 }

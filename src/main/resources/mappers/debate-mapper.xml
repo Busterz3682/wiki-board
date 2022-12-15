@@ -5,7 +5,7 @@
 <mapper namespace="com.side.wiki.mapper.DebateBoardMapper">
 	
 	<select id="getDebateDetail" resultType="com.side.wiki.vo.DebateReplyVO" parameterType="string">
-		select doc_title as docTitle, content, regdate 
+		select doc_title as docTitle, writer, content, regdate, reply_no as replyNo
 		from debatereply 
 		where doc_title = #{docTitle}
 		order by reply_no
@@ -16,7 +16,12 @@
 	</insert>
 
 	<insert id="insertReply" parameterType="com.side.wiki.vo.DebateReplyVO">
-		insert into debatereply(doc_title, reply_no, content, regdate) 
-		values(#{docTitle}, debatereply_seq.nextval, #{content}, sysdate)
+		insert into debatereply(doc_title, reply_no, content, regdate, writer, password) 
+		values(#{docTitle}, debatereply_seq.nextval, #{content}, sysdate, #{writer}, #{password})
 	</insert>
+	
+	<delete id="deleteReply" parameterType="com.side.wiki.vo.DebateReplyVO">
+		delete from debatereply
+		where doc_title = #{docTitle} and reply_no = #{replyNo} and password = #{password}
+	</delete>
 </mapper>

@@ -19,6 +19,67 @@
 	src="${pageContext.request.contextPath}/resources/wikipedia-template/js/vendor/modernizr-2.8.3.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style type="text/css">
+.tip {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  background: transparent;
+  border: 10px solid #ccc;
+}
+
+.tip-up {
+  top: -25px; /* Same as body margin top + border */
+  left: 10px;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-top-color: transparent;
+}
+
+.tip-down {
+  bottom: -25px;
+  left: 10px;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;  
+}
+
+.tip-left {
+  top: 10px;
+  left: -25px;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;  
+}
+
+.tip-right {
+  top: 10px;
+  right: -25px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;  
+}
+
+.dialogbox .body {
+  position: relative;
+  max-width: 50%;
+  height: auto;
+  margin: 20px 10px;
+  padding: 5px;
+  background-color: #DADADA;
+  border-radius: 3px;
+  border: 5px solid #ccc;
+}
+
+.body .message {
+  min-height: 30px;
+  border-radius: 3px;
+  font-family: Arial;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #797979;
+}
+</style>	
 </head>
 
 <body>
@@ -91,22 +152,33 @@
 					</div>
 					This is a blue <a href="">pencil</a>
 				</div>
-				<table>
-					<tbody>
-						<c:forEach var="item" items="${debatedetail }">
-							<tr>
-								<td>작성일 : ${item.regDate }</td>
-							</tr>
-							<tr>
-								<td colspan="2">내용 : ${item.content }</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				<textarea rows="3" cols="40" name="content" id="content"></textarea>
-				<button type="button" id="insertReplyBtn">작성</button>
-				<input type="hidden" name="docTitle" id="docTitle" value="${debatedetail[0].docTitle}">
-				<input type="hidden" name="email" id="email" value="Email-댓글작성테스트중">
+				<div>
+					<ul>
+						
+					</ul>
+				</div>
+		        <c:forEach var="item" items="${debatedetail }">
+					<div class="container">
+					  <div class="dialogbox">
+					    <div class="body">
+					      <span class="tip tip-left"></span>
+						      <div class="message">
+				        		<span>
+									작성자 : ${item.writer } 작성일 : ${item.regDate }<br>
+									내용 : ${item.content }<button style="float: right;"  id="${item.replyNo }" onclick="addDeleteBtn(this.id)">삭제</button>
+									<input style="float: right;" type="password" id="pw${item.replyNo }">
+								</span>
+						      </div>
+					    </div>
+					  </div>
+					</div>	
+				</c:forEach>
+				<div>
+					<p>작성자   &nbsp; <input type="text" name="writer" id="writer"></p> <p>비밀번호 <input type="password" name="password" id="password"></p>
+					<textarea rows="3" cols="40" name="content" id="content"></textarea>
+					<button type="button" id="insertReplyBtn">작성</button>
+					<input type="hidden" name="docTitle" id="docTitle" value="${debatedetail[0].docTitle}">
+				</div>
 				<div class="lavenderBox">
 					<div class="header">여기는 추후에 추가예정</div>
 					<div class="subtitle linklist">
@@ -163,36 +235,60 @@
 		src="${pageContext.request.contextPath}/resources/wikipedia-template/script.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/search.js"></script>
 	<script>
-	window.onload = function() {
-		//댓글 등록 with ajax
-		$('#insertReplyBtn').click(function() {
-			var docTitleA = $('#docTitle').val();
-			var emailA = $('#email').val();
-			var contentA = $('#content').val();
-			if (contentA === '') {
-				alert('내용을 입력해주세요');
-			} else {
-				$.ajax({
-					type : "POST",
-					url : "<c:url value='/debate/insertreply'/>",
-					dataType : "json",
-					data : {
-						docTitle : docTitleA,
-						email : emailA,
-						content : contentA
-					},
-					success : function(result) {
-						if (result == 1) {
-							alert('댓글등록성공');
-							location.reload();
-						} else {
-							alert('오류발생');
-						}
+	//댓글 등록 with ajax
+	$('#insertReplyBtn').click(function() {
+		let docTitle = $('#docTitle').val();
+		let content = $('#content').val();
+		let writer = $('#writer').val();
+		let password = $('#password').val();
+		if (content === '') {
+			alert('내용을 입력해주세요');
+		} else {
+			$.ajax({
+				type : "POST",
+				url : "<c:url value='/debate/insertreply'/>",
+				dataType : "json",
+				data : {
+					"docTitle" : docTitle,
+					"content" : content,
+					"writer" : writer,
+					"password" : password
+				},
+				success : function(result) {
+					if (result == 1) {
+						alert('댓글등록성공');
+						location.reload();
+					} else {
+						alert('오류발생');
 					}
-				});
+				}
+			});
+		}
+	});
+	
+	function addDeleteBtn(clickedId) {
+		let docTitle = $('#docTitle').val();
+		let pw = $('#pw'+clickedId).val();
+		$.ajax({
+			type : "POST",
+			url : "http://localhost:8181/debate/deletereply",
+			dataType : "json",
+			data : {
+				"docTitle" : docTitle,
+				"password" : pw,
+				"replyNo" : clickedId
+			},
+			success : function(result) {
+				if (result == 1) {
+					alert('삭제성공');
+					location.reload();
+				} else {
+					alert('오류발생');
+				}
 			}
-		});
+		})
 	}
+	
 	</script>
 </body>
 
