@@ -81,14 +81,18 @@
 				<h1>${doc.docTitle } <a href="http://localhost:8181/wiki/updateDoc/${doc.docTitle }">[편집]</a></h1>
 				<p class="siteSub">이 문서의 마지막 수정 시간은 ${doc.docDate } 입니다</p>
 				<p class="roleNote">${doc.docContent }</p>
-
 				<div class="articleRight">
-					<div class="articleRightInner">
-						<img
-							src="${pageContext.request.contextPath}/resources/wikipedia-template/img/pencil.jpg"
-							alt="pencil" />
-					</div>
-					This is a blue <a href="">pencil</a>
+					<c:if test="${doc.docImage == 0 }">
+						<div class="articleRightInner">
+							<img src="${pageContext.request.contextPath}/resources/wikipedia-template/img/noimage.jpg" alt="등록된 이미지 없음" />
+						</div>
+						등록된 이미지가 없음
+					 </c:if>
+			         <c:if test = "${doc.docImage == 1 }">
+			           	<div class="articleRightInner">
+							<img src="${pageContext.request.contextPath}/img/${doc.docTitle}/image.jpg"	alt="image" />
+						</div>
+			         </c:if>
 				</div>
 				<div class="contentsPanel">
 					<div class="contentsHeader">목차</div>
@@ -108,7 +112,7 @@
 				</c:forEach>
 
 				<div class="lavenderBox">
-					<div class="header">여기는 추후에 추가예정</div>
+					<div class="header">여기는 아직 기능하지 않습니다</div>
 					<div class="subtitle linklist">
 						<a href="#">여기는</a> <a href="#">뭐할지</a> <a href="#">고민중</a>
 					</div>

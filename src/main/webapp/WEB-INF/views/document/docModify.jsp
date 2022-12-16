@@ -112,7 +112,7 @@ function addContent(){
 					<h2><input type="text" name="chapterTitle" id="chapterTitle" value="${item.chapterTitle }"></h2>
 					<c:forEach items="${detail }" var="itemdt">
 						<c:if test="${item.chapterIndex == itemdt.chapterIndex }">
-							<p><textarea name="chapterContent${item.chapterIndex }" id="chapterContent" cols="30" rows="10">${itemdt.chapterContent }</textarea>
+							<p><textarea name="chapterContent${item.chapterIndex }" id="chapterContent" cols="75" rows="5">${itemdt.chapterContent }</textarea>
 								<input type="hidden" name="detailIndex" value="${itemdt.detailIndex }">
 							</p>
 						</c:if>

@@ -1,8 +1,7 @@
 package com.side.wiki.controller;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.side.wiki.document.service.DocumentService;
 import com.side.wiki.vo.ChapterVO;
@@ -43,11 +43,29 @@ public class DocumentController {
 
 	//문서 작성
 	@PostMapping("/insertDoc")
-	public String insertDoc(HttpServletRequest req) {
+	public String insertDoc(HttpServletRequest req, @RequestParam(name = "file", required = false) MultipartFile file) {
 		logger.info("insertDoc 요청들어옴");
 		String docTitle = req.getParameter("docTitle");
 		String docContent = req.getParameter("docContent");
-		DocumentVO vo = new DocumentVO(docTitle, docContent, null, 0);
+		DocumentVO vo = new DocumentVO(docTitle, docContent, null, 0, 0);
+
+		File uploadPath = new File("c:\\upload\\" + docTitle);
+		if(!uploadPath.exists()) {
+			uploadPath.mkdirs();
+		}
+		logger.info("Upload File Name : " + file.getOriginalFilename());
+		logger.info("Upload File size : " + file.getSize());
+		if(file.getSize() != 0) {
+			File saveFile = new File(uploadPath, "image.jpg");
+			vo.setDocImage(1);
+			try {
+				file.transferTo(saveFile);
+			} catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+		}
+
+		//문서(텍스트) 작성 시작
 		List<ChapterVO> cList = new ArrayList<ChapterVO>();
 		for(int i = 0; i < req.getParameterValues("chapterTitle").length; i ++) {
 			cList.add(new ChapterVO(docTitle, i + 1, req.getParameterValues("chapterTitle")[i]));
@@ -57,7 +75,7 @@ public class DocumentController {
 			for(int j = 0; j < req.getParameterValues("chapterContent" + i).length; j ++) {
 				dList.add(new DetailVO(docTitle, i, req.getParameterValues("chapterContent" + i)[j], j + 1));
 			}
-		}
+		} // 문서(텍스트) 작성 끝
 		documentService.insertDoc(vo, cList, dList);
 		return "redirect:/";
 	}
@@ -66,6 +84,7 @@ public class DocumentController {
 	@GetMapping("/getDoc/{docTitle}")
 	public String getDoc(@PathVariable String docTitle, Model model) {
 		logger.info("getDoc 요청 들어옴");
+		System.out.println(documentService.getDoc(docTitle));
 		model.addAttribute("doc", documentService.getDoc(docTitle));
 		model.addAttribute("detail", documentService.getDetail(docTitle));
 		model.addAttribute("chapter",  documentService.getChapter(docTitle));
@@ -87,7 +106,7 @@ public class DocumentController {
 		logger.info("updateDoc 요청 들어옴");
 		String docTitle = req.getParameter("docTitle");
 		String docContent = req.getParameter("docContent");
-		DocumentVO vo = new DocumentVO(docTitle, docContent, null, 0);
+		DocumentVO vo = new DocumentVO(docTitle, docContent, null, 0, 0);
 		List<ChapterVO> cList = new ArrayList<ChapterVO>();
 		for(int i = 0; i < req.getParameterValues("chapterTitle").length; i ++) {
 			cList.add(new ChapterVO(docTitle, i + 1, req.getParameterValues("chapterTitle")[i]));
@@ -98,8 +117,6 @@ public class DocumentController {
 				dList.add(new DetailVO(docTitle, i, req.getParameterValues("chapterContent" + i)[j], j + 1));
 			}
 		}
-		System.out.println(cList);
-		System.out.println(dList);
 		documentService.updateDoc(vo, cList, dList);
 		return "redirect:/";
 	}
@@ -116,8 +133,10 @@ public class DocumentController {
 	@GetMapping("/getRandomDoc")
 	public String getRandomDoc(Model model) {
 		logger.info("getRandomDoc 요청 들어옴");
-		documentService.getRandomDoc();
-		model.addAttribute("doc", documentService.getRandomDoc());
+		String docTitle = (documentService.getRandomDoc()).getDocTitle();
+		model.addAttribute("doc", documentService.getDoc(docTitle));
+		model.addAttribute("detail", documentService.getDetail(docTitle));
+		model.addAttribute("chapter",  documentService.getChapter(docTitle));
 		return "document/docShow";
 	}
 
@@ -141,7 +160,6 @@ public class DocumentController {
 	@GetMapping("/searchDoc")
 	public List<String> searchList(String search){
 		ArrayList<String> searchResult =  (ArrayList<String>) documentService.searchList(search);
-		System.out.println(searchResult);
 		return searchResult;
 	}
 }

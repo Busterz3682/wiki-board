@@ -163,11 +163,13 @@
 					    <div class="body">
 					      <span class="tip tip-left"></span>
 						      <div class="message">
+						      <c:if test="${item.writer } != null && ${item.content } != null">
 				        		<span>
 									작성자 : ${item.writer } 작성일 : ${item.regDate }<br>
 									내용 : ${item.content }<button style="float: right;"  id="${item.replyNo }" onclick="addDeleteBtn(this.id)">삭제</button>
 									<input style="float: right;" type="password" id="pw${item.replyNo }">
 								</span>
+						      </c:if>
 						      </div>
 					    </div>
 					  </div>
@@ -180,7 +182,7 @@
 					<input type="hidden" name="docTitle" id="docTitle" value="${debatedetail[0].docTitle}">
 				</div>
 				<div class="lavenderBox">
-					<div class="header">여기는 추후에 추가예정</div>
+					<div class="header">여기는 아직 기능하지 않습니다</div>
 					<div class="subtitle linklist">
 						<a href="#">여기는</a> <a href="#">뭐할지</a> <a href="#">고민중</a>
 					</div>

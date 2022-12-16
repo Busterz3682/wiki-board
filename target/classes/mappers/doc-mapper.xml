@@ -9,6 +9,7 @@
 		<result column="doc_content" property="docContent" />
 		<result column="doc_date" property="docDate" javaType="java.util.Date" />
 		<result column="doc_id" property="docId" />
+		<result column="doc_image" property="docImage"/>
 	</resultMap>
 	
 	<resultMap type="com.side.wiki.vo.ChapterVO" id="chapter">
@@ -43,8 +44,8 @@
 	  
 	 
 	<insert id="insertDoc">
-		insert into doc(doc_title, doc_content, doc_date, doc_id)
-		values(#{docTitle}, #{docContent}, sysdate, doc_seq.nextval)
+		insert into doc(doc_title, doc_content, doc_date, doc_id, doc_image)
+		values(#{docTitle}, #{docContent}, sysdate, doc_seq.nextval, #{docImage})
 	</insert>
 	
 	<insert id="insertChapter">

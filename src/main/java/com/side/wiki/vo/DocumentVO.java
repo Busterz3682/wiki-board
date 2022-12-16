@@ -37,4 +37,5 @@ public class DocumentVO {
 	private String docContent;
 	private Date docDate;
 	private int docId;
+	private int docImage;
 }
