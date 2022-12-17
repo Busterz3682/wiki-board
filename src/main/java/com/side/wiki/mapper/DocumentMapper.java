@@ -22,13 +22,23 @@ public interface DocumentMapper {
 	List<DetailVO> getDetail(String docTitle);
 	List<ChapterVO> getChapter(String docTitle);
 	
+	//삭제요청 여부
+	int isRequested(String docTitle);
+	
+	//삭제요청 리스트
+	List<String> getRequestedList(PagingVO vo);
+	
 	//문서 수정
 	void updateDoc(DocumentVO vo);
 	void updateChapter(ChapterVO vo);
 	void updateDetail(DetailVO vo);
 	
 	//문서 삭제
-	void deleteDoc(DocumentVO vo);
+	void deleteDoc(String docTitle);
+	void deleteRequest(String docTitle);
+	
+	//문서 삭제 요청
+	void requestDeleteDoc(String docTitle);
 	
 	//랜덤 문서
 	DocumentVO getRandomDoc();
@@ -38,6 +48,7 @@ public interface DocumentMapper {
 	
 	//총 게시물수
 	int getTotalCount();
+	int getTotalRequest();
 	
 	//비동기 검색
 	List<String> searchList(String search);

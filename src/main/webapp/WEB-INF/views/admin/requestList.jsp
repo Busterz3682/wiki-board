@@ -85,8 +85,8 @@
 			</div>
 			<div class="article">
 				<h1>전체 문서 목록</h1>
-				<p class="siteSub">현재 ${totalCount }개의 문서가 등록되어있습니다</p>
-				<p class="roleNote">최근 등록(혹은 수정)된 순서대로 보여집니다</p>
+				<p class="siteSub">삭제요청이 들어온 문서 목록</p>
+				<p class="roleNote"></p>
 
 				
 				<div class="content">
@@ -96,26 +96,25 @@
 							<table class="table table-striped custom-table">
 								<thead>
 									<tr>
-										<th scope="col">문서번호</th>
 										<th scope="col">문서제목</th>
-										<th scope="col">작성일자</th>
 										<th scope="col"></th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="list" items="${doclist }">
+									<c:forEach var="list" items="${reqList }">
 										<tr scope="row">
-											<td>${list.docId }</td>
-											<td>${list.docTitle}</td>
-											<td>${list.docDate }</td>
-											<td><a
-												href="http://localhost:8181/wiki/getDoc/${list.docTitle}">상세보기</a></td>
+											<td>${list }</td>
+											<td>
+											<form action="http://localhost:8181/wiki/deleteDoc/${list }" method="post">
+												<button type="submit">삭제하기</button>
+											</form>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 							<c:if test="${page.prev }">
-								<a href="getDocList?currpage=${page.startBlock-1}"><c:out
+								<a href="getReqList?currpage=${page.startBlock-1}"><c:out
 										value="이전" /></a>
 							</c:if>
 							<c:forEach var="index" begin="${page.startBlock}"
@@ -124,11 +123,11 @@
 									<c:out value="${index }" />
 								</c:if>
 								<c:if test="${index!=page.currPage }">
-									<a href="getDocList?currpage=${index}">${index }</a>
+									<a href="getReqList?currpage=${index}">${index }</a>
 								</c:if>
 							</c:forEach>
 							<c:if test="${page.next }">
-								<a href="getDocList?currpage=${page.endBlock + 1}"><c:out
+								<a href="getReqList?currpage=${page.endBlock + 1}"><c:out
 										value="다음" /></a>
 							</c:if>
 						</div>

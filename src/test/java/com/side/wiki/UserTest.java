@@ -9,15 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.side.wiki.controller.UserController;
 import com.side.wiki.mapper.UserMapper;
+import com.side.wiki.user.service.UserService;
 import com.side.wiki.vo.UserVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/mybatis-config.xml")
+@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/mybatis-config.xml", "file:src/main/webapp/WEB-INF/spring/servlet-context.xml",
+		"file:src/main/webapp/WEB-INF/spring/email-config.xml", "file:src/main/webapp/WEB-INF/spring/interceptor-config.xml"})
 public class UserTest {
 	
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired 
+	private UserService userService;
+	
+	@Autowired
+	private UserController userController;
 	
 //	@Test
 //	public void userJoinTest() {
@@ -39,13 +48,20 @@ public class UserTest {
 //		assertEquals("email1", "email1");
 //	}
 	
+//	@Test
+//	public void userJoinTest() {
+//		UserVO vo = new UserVO();
+//		vo.setEmail("a");
+//		vo.setPassword("b");
+//		userMapper.userJoin(vo);
+//	}
+	
 	@Test
-	public void userJoinTest() {
+	public void contTest() {
 		UserVO vo = new UserVO();
-		vo.setEmail("a");
-		vo.setPw("b");
-		assertEquals(1, userMapper.userJoin(vo));
-		
+		vo.setEmail("Test");
+		vo.setPassword("123");
+		userController.userJoin(vo);
 	}
-
+	
 }

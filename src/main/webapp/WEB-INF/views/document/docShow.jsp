@@ -44,14 +44,25 @@
 					<li><a href="#">도움말</a></li>
 					<li><a href="#">정책과 지침</a></li>
 				</ul>
+				<c:if test="${sessionScope.user.grade == 'admin' }">
+					<h3>관리자 전용</h3>
+					<ul>
+						<li><a href="http://localhost:8181/wiki/getReqList">삭제요청목록</a></li>
+					</ul>
+				</c:if>
 			</div>
 
 
 		</div>
 		<div class="mainsection">
 			<div class="headerLinks">
-				<span class="user">Not logged in</span> <a href="#">Talk</a> <a href="#">Contributions</a> <a
-					href="#">Create account</a> <a href="#">Log in</a>
+				<c:if test="${sessionScope.user == null }">
+					<span class="user">로그인 안됨</span> <a href="#">Talk</a> <a href="#">Contributions</a> <a
+						href="http://localhost:8181/user/join">계정 만들기</a> <a href="http://localhost:8181/user/loginPage">Log in</a>
+				</c:if>
+				<c:if test="${sessionScope.user != null }">
+					<span class="user">${sessionScope.user.email }</span> <a href="http://localhost:8181/user/logout">Talk</a> <a href="#">Contributions</a><a href="#">Log out</a>
+				</c:if>
 					<ul id="searchResult">
           		
           			</ul>
@@ -61,6 +72,12 @@
 					<ul>
 						<li><a href="http://localhost:8181/wiki/getDoc/${doc.docTitle }" class="active">문서</a></li>
 						<li><a href="http://localhost:8181/debate/debatedetail/${doc.docTitle }">토론</a></li>
+						<c:if test="${isRequested > 0 }">
+							<li><a>삭제요청 되어있는문서</a></li>
+						</c:if>
+						<c:if test="${isRequested == 0 }">
+							<li><a href="http://localhost:8181/wiki/requestDeleteDoc/${doc.docTitle }">삭제요청</a></li>
+						</c:if>
 					</ul>
 				</div>
 				<div id="simpleSearch">

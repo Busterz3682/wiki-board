@@ -8,5 +8,8 @@ public interface UserMapper {
 	public int userJoin(UserVO vo);
 
 	//로그인
-	public String userLogin(UserVO vo);
+	public UserVO userLogin(String email);
+
+	//중복체크
+	public int idCheck(String id);
 }

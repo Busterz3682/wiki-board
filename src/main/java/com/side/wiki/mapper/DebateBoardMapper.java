@@ -18,7 +18,8 @@ public interface DebateBoardMapper {
 	//댓글 삭제
 	int deleteReply(DebateReplyVO vo);
 
-	
+	//토론페이지 삭제
+	void deleteDebatePage(String docTitle);
 	
 	
 }

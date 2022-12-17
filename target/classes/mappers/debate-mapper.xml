@@ -24,4 +24,9 @@
 		delete from debatereply
 		where doc_title = #{docTitle} and reply_no = #{replyNo} and password = #{password}
 	</delete>
+	
+	<delete id="deleteDebatePage" parameterType="string">
+		delete from debatereply
+		where doc_title = #{docTitle}
+	</delete>
 </mapper>

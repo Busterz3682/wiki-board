@@ -55,7 +55,7 @@ public class DocumentController {
 		}
 		logger.info("Upload File Name : " + file.getOriginalFilename());
 		logger.info("Upload File size : " + file.getSize());
-		if(file.getSize() != 0) {
+		if(file.getSize() > 0) {
 			File saveFile = new File(uploadPath, "image.jpg");
 			vo.setDocImage(1);
 			try {
@@ -77,14 +77,14 @@ public class DocumentController {
 			}
 		} // 문서(텍스트) 작성 끝
 		documentService.insertDoc(vo, cList, dList);
-		return "redirect:/";
+		return "redirect:/wiki/getDoc/" + docTitle;
 	}
 
 	//문서 조회
 	@GetMapping("/getDoc/{docTitle}")
 	public String getDoc(@PathVariable String docTitle, Model model) {
 		logger.info("getDoc 요청 들어옴");
-		System.out.println(documentService.getDoc(docTitle));
+		model.addAttribute("isRequested", documentService.isRequested(docTitle));
 		model.addAttribute("doc", documentService.getDoc(docTitle));
 		model.addAttribute("detail", documentService.getDetail(docTitle));
 		model.addAttribute("chapter",  documentService.getChapter(docTitle));
@@ -118,15 +118,24 @@ public class DocumentController {
 			}
 		}
 		documentService.updateDoc(vo, cList, dList);
-		return "redirect:/";
+		return "redirect:/wiki/getDoc/" + docTitle;
 	}
 
-	//문서 삭제
-	@PostMapping("/deleteDoc")
-	public String deleteDoc(DocumentVO vo) {
+	//문서 삭제 요청
+	@GetMapping("/requestDeleteDoc/{docTitle}")
+	public String requestDeleteDoc(@PathVariable String docTitle) {
+		logger.info("requestDeleteDoc 요청 들어옴");
+		documentService.requestDeleteDoc(docTitle);
+		return "redirect:/wiki/getDoc/" + docTitle;
+	}
+	
+	//문서 삭제(관리자 전용)
+	@PostMapping("/deleteDoc/{docTitle}")
+	public String deleteDoc(@PathVariable String docTitle) {
 		logger.info("deleteDoc 요청 들어옴");
-		documentService.deleteDoc(vo);
-		return "redirect:/";
+		System.out.println(docTitle);
+		documentService.deleteDoc(docTitle);
+		return "redirect:/wiki/getReqList";
 	}
 
 	//랜덤 문서
@@ -134,6 +143,7 @@ public class DocumentController {
 	public String getRandomDoc(Model model) {
 		logger.info("getRandomDoc 요청 들어옴");
 		String docTitle = (documentService.getRandomDoc()).getDocTitle();
+		model.addAttribute("isRequested", documentService.isRequested(docTitle));
 		model.addAttribute("doc", documentService.getDoc(docTitle));
 		model.addAttribute("detail", documentService.getDetail(docTitle));
 		model.addAttribute("chapter",  documentService.getChapter(docTitle));
@@ -154,6 +164,21 @@ public class DocumentController {
 		model.addAttribute("page", vo);
 		return "document/docList";
 	}
+	
+	//삭제요청문서목록(관리자전용)
+	@GetMapping("/getReqList")
+	public String getReqList(@RequestParam(required = false, defaultValue = "1", name="currpage") int currPage ,Model model) {
+		int totalCount = documentService.getTotalRequest();
+		int pageSize = 10;
+		int blockSize = 10;
+		PagingVO vo = new PagingVO(currPage, totalCount, pageSize, blockSize);
+		ArrayList<String> reqList = (ArrayList<String>) documentService.getRequestedList(vo);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("reqList", reqList);
+		model.addAttribute("page", vo);
+		return "admin/requestList";
+	}
+	
 
 	//비동기검색
 	@ResponseBody
@@ -161,5 +186,16 @@ public class DocumentController {
 	public List<String> searchList(String search){
 		ArrayList<String> searchResult =  (ArrayList<String>) documentService.searchList(search);
 		return searchResult;
+	}
+	
+	//문서 존재 여부 체크
+	@ResponseBody
+	@GetMapping("/check")
+	public String check(String docTitle) {
+		if(documentService.getDoc(docTitle) == null) {
+			return "ok";
+		} else {
+			return "exist";
+		}
 	}
 }

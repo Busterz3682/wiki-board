@@ -1,24 +1,16 @@
 package com.side.wiki.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.side.wiki.debateboard.service.DebateBoardService;
-import com.side.wiki.document.service.DocumentService;
 import com.side.wiki.vo.DebateReplyVO;
-import com.side.wiki.vo.DocumentVO;
-import com.side.wiki.vo.PagingVO;
 
 import lombok.extern.java.Log;
 

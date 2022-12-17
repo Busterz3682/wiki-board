@@ -24,7 +24,6 @@
 		<result column="chapter_content" property="chapterContent"/>
 		<result column="detail_index" property="detailIndex"/>
 	</resultMap>
-		
 	
 	<select id="getDoc" resultMap="doc" parameterType="string">
 		select * from doc
@@ -41,7 +40,11 @@
 		from detail
 		where doc_title = #{docTitle}
 	</select> 
-	  
+	
+	<select id="isRequested" resultType="int" parameterType="string">
+		select count(*) from deleterequest
+		where doc_title = #{docTitle}
+	</select>  
 	 
 	<insert id="insertDoc">
 		insert into doc(doc_title, doc_content, doc_date, doc_id, doc_image)
@@ -73,10 +76,31 @@
 		where doc_title = #{docTitle} and chapter_index = #{chapterIndex} and detail_index = #{detailIndex}
 	</update>
 
-	<delete id="deleteDoc">
+	<delete id="deleteDoc" parameterType="string">
 		delete from doc where doc_title = #{docTitle}
 	</delete>
 
+	<delete id="deleteRequest" parameterType="string">
+		delete from deleterequest where doc_title = #{docTitle}
+	</delete>
+	
+	<insert id="requestDeleteDoc">
+		insert into deleterequest values (#{docTitle})
+	</insert>
+	
+	<select id="getTotalRequest" resultType="int">
+		select count(*) from deleterequest
+	</select>
+	
+	<select id="getRequestedList" resultType="string" parameterType="com.side.wiki.vo.PagingVO">
+		select doc_title 
+		from (select rownum as rnum, e.*
+			from (
+					select * from deleterequest
+				  )e
+			) where rnum between #{startRow} and #{endRow}
+	</select>
+	
 	<select id="getRandomDoc" resultMap="doc">
 		select *
 		from

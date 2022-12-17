@@ -6,13 +6,17 @@
 	
 	<!-- 회원가입 -->
 	<insert id="userJoin" parameterType="com.side.wiki.vo.UserVO">
-		insert into users values(#{email}, #{pw})
+		insert into users values(#{email}, #{password}, 'normal')
 	</insert>
 
 	<!-- 로그인 -->
-	<select id="userLogin" parameterType="com.side.wiki.vo.UserVO" resultType="string">
-		select email from users
-		where email = #{email} and pw = #{pw}
+	<select id="userLogin" resultType="com.side.wiki.vo.UserVO">
+		select * from users
+		where email = #{email}
  	</select>
 	
+	<select id="idCheck" parameterType="string" resultType="int">
+		select count(*) from users
+		where email = #{email}
+	</select>
 </mapper>

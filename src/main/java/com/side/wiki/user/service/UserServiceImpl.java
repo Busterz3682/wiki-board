@@ -1,5 +1,7 @@
 package com.side.wiki.user.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String userLogin(UserVO vo) {
-		return userMapper.userLogin(vo);
+	public UserVO userLogin(String email) {
+		return userMapper.userLogin(email);
+	}
+
+	@Override
+	public int idCheck(String id) {
+		return userMapper.idCheck(id);
+	}
+
+	@Override
+	public void logout(HttpSession session) {
+		session.removeAttribute("user");
 	}
 
 }

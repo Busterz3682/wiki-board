@@ -63,14 +63,25 @@ function addContent(){
 					<li><a href="#">도움말</a></li>
 					<li><a href="#">정책과 지침</a></li>
 				</ul>
+				<c:if test="${sessionScope.user.grade == 'admin' }">
+					<h3>관리자 전용</h3>
+					<ul>
+						<li><a href="http://localhost:8181/wiki/getReqList">삭제요청목록</a></li>
+					</ul>
+				</c:if>
 			</div>
 
 
 		</div>
 		<div class="mainsection">
 			<div class="headerLinks">
-				<span class="user">Not logged in</span> <a href="#">Talk</a> <a href="#">Contributions</a> <a
-					href="#">Create account</a> <a href="#">Log in</a>
+				<c:if test="${sessionScope.user == null }">
+					<span class="user">로그인 안됨</span> <a href="#">Talk</a> <a href="#">Contributions</a> <a
+						href="http://localhost:8181/user/join">계정 만들기</a> <a href="http://localhost:8181/user/loginPage">Log in</a>
+				</c:if>
+				<c:if test="${sessionScope.user != null }">
+					<span class="user">${sessionScope.user.email }</span> <a href="#">Talk</a> <a href="#">Contributions</a><a href="http://localhost:8181/user/logout">Log out</a>
+				</c:if>
 					<ul id="searchResult">
           		
           			</ul>
@@ -97,7 +108,7 @@ function addContent(){
 
 			</div>
 			<div class="article">
-			<form method="post" action="insertDoc" enctype="multipart/form-data">
+			<form method="post" action="insertDoc" onsubmit="return check()" enctype="multipart/form-data">
 				<h1><input type="text" name="docTitle" id="docTitle" placeholder="문서 제목을 입력해주세요"></h1>
 				<p class="siteSub">위키백과, 우리 모두의 백과사전.</p>
 				<p class="roleNote"><input type="text" name="docContent" id="docContent" placeholder="개요를 입력해주세요"></p>
@@ -165,7 +176,35 @@ function addContent(){
 	<script
 		src="${pageContext.request.contextPath}/resources/wikipedia-template/script.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/search.js"></script>
-
+	<script>
+		/* 유효성 체크 */
+		function check() {
+			let title = $('#docTitle').val();
+			let rtn = false;
+			if(title == '') {
+				alert('문서 제목을 입력해주세요');
+			} else {
+				$.ajax({
+					  type : 'get',
+					  url : '/wiki/check',
+					  data : {"docTitle" : title},
+					  success : function(result){
+						  console.log(result);
+						  if(result == 'ok') {
+							  alert('문서가 등록되었습니다');
+							  rtn = true;
+						  } else {
+							  alert('이미 등록되어있는 문서입니다');
+						  }
+					  },
+					  error : function() {
+						  alert('오류발생')
+					  }
+			 	});
+			}
+			return rtn;
+		}
+	</script>
 </body>
 
 </html>

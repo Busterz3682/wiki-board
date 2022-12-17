@@ -25,12 +25,11 @@ public class DocumentServiceImpl implements DocumentService {
 	@Autowired
 	private DebateBoardMapper debateBoardMapper;
 	
-	//문서 작성
 	@Override
 	@Transactional
 	public void insertDoc(DocumentVO vo, List<ChapterVO> vo2, List<DetailVO> vo3) {
 		documentMapper.insertDoc(vo);
-		debateBoardMapper.makeDebatePage(vo.getDocTitle());
+//		debateBoardMapper.makeDebatePage(vo.getDocTitle());
 		for(ChapterVO item : vo2) {
 			documentMapper.insertChapter(item);
 		}
@@ -39,7 +38,6 @@ public class DocumentServiceImpl implements DocumentService {
 		}
 	}
 
-	//문서 조회
 	@Override
 	public DocumentVO getDoc(String docTitle) {
 		return documentMapper.getDoc(docTitle);
@@ -53,8 +51,6 @@ public class DocumentServiceImpl implements DocumentService {
 		return documentMapper.getChapter(docTitle);
 	}
 
-
-	//문서 수정
 	@Override
 	@Transactional
 	public void updateDoc(DocumentVO vo, List<ChapterVO> vo2, List<DetailVO> vo3) {
@@ -67,13 +63,14 @@ public class DocumentServiceImpl implements DocumentService {
 		}
 	}
 
-	//문서 삭제
 	@Override
-	public void deleteDoc(DocumentVO vo) {
-		documentMapper.deleteDoc(vo);
+	@Transactional
+	public void deleteDoc(String docTitle) {
+		documentMapper.deleteDoc(docTitle);
+		documentMapper.deleteRequest(docTitle);
 	}
 	
-	//랜덤 문서
+	@Override
 	public DocumentVO getRandomDoc() {
 		return documentMapper.getRandomDoc();
 	}
@@ -91,6 +88,26 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override
 	public List<String> searchList(String search) {
 		return documentMapper.searchList(search);
+	}
+
+	@Override
+	public void requestDeleteDoc(String docTitle) {
+		documentMapper.requestDeleteDoc(docTitle);
+	}
+
+	@Override
+	public int isRequested(String docTitle) {
+		return documentMapper.isRequested(docTitle);
+	}
+
+	@Override
+	public int getTotalRequest() {
+		return documentMapper.getTotalRequest();
+	}
+
+	@Override
+	public List<String> getRequestedList(PagingVO vo) {
+		return documentMapper.getRequestedList(vo);
 	}
 
 	

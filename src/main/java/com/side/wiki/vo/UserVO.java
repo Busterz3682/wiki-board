@@ -6,7 +6,7 @@ import lombok.Data;
 public class UserVO {
 	
 	private String email;
-	private String pw;
+	private String password;
 	private String grade;
 
 }

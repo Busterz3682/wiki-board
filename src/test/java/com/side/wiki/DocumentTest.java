@@ -13,16 +13,17 @@ import com.side.wiki.document.service.DocumentService;
 import com.side.wiki.mapper.DocumentMapper;
 import com.side.wiki.vo.DetailVO;
 import com.side.wiki.vo.DocumentVO;
+import com.side.wiki.vo.PagingVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/mybatis-config.xml", "file:src/main/webapp/WEB-INF/spring/servlet-context.xml"})
+@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/mybatis-config.xml"})
 public class DocumentTest {
 
 	@Autowired
 	private DocumentMapper mapper;
 	
-	@Autowired
-	private DocumentService service;
+//	@Autowired
+//	private DocumentService service;
 	
 //	@Test
 //	public void docInputTest() {
@@ -41,10 +42,10 @@ public class DocumentTest {
 //		System.out.println(mapper.searchList("Test"));
 //	}
 	
-	@Test
-	public void docTest() {
-		System.out.println(mapper.getDoc("위키백과 미러사이트"));
-	}
+//	@Test
+//	public void docTest() {
+//		System.out.println(mapper.getDoc("위키백과 미러사이트"));
+//	}
 	
 //	@Test
 //	public void detailTest() {
@@ -64,4 +65,20 @@ public class DocumentTest {
 //		System.out.println(service.getChapter("221213문서"));
 //		System.out.println(service.getDetail("221213문서"));
 //	}
+	
+	@Test
+	public void reqTest() {
+		for(int i = 1; i <= 200; i++) {
+			mapper.requestDeleteDoc("문서삭제요청목록 테스트 " + i);
+		}
+	}
+	
+//	@Test
+//	public void listTest() {
+//		PagingVO vo = new PagingVO(1, mapper.getTotalRequest(), 10, 10);
+//		for(String s : mapper.getRequestedList(vo)) {
+//			System.out.println(s);
+//		}
+//	}
+	
 }

@@ -63,14 +63,25 @@ function addContent(){
 					<li><a href="#">도움말</a></li>
 					<li><a href="#">정책과 지침</a></li>
 				</ul>
+				<c:if test="${sessionScope.user.grade == 'admin' }">
+					<h3>관리자 전용</h3>
+					<ul>
+						<li><a href="http://localhost:8181/wiki/getReqList">삭제요청목록</a></li>
+					</ul>
+				</c:if>
 			</div>
 
 
 		</div>
 		<div class="mainsection">
 			<div class="headerLinks">
-				<span class="user">Not logged in</span> <a href="#">Talk</a> <a href="#">Contributions</a> <a
-					href="#">Create account</a> <a href="#">Log in</a>
+				<c:if test="${sessionScope.user == null }">
+					<span class="user">로그인 안됨</span> <a href="#">Talk</a> <a href="#">Contributions</a> <a
+						href="http://localhost:8181/user/join">계정 만들기</a> <a href="http://localhost:8181/user/loginPage">Log in</a>
+				</c:if>
+				<c:if test="${sessionScope.user != null }">
+					<span class="user">${sessionScope.user.email }</span> <a href="#">Talk</a> <a href="#">Contributions</a><a href="http://localhost:8181/user/logout">Log out</a>
+				</c:if>
 					<ul id="searchResult">
           		
           			</ul>
